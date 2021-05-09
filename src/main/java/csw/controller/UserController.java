@@ -32,7 +32,8 @@ public class UserController extends AbstractController {
 	@RequestMapping(value="/auth",method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<HttpResponseDTO> authUser(@RequestBody LoginDTO login) throws Exception {
-		return super.response(userService.authUser(login), HttpStatus.OK);
+		HttpResponseDTO response = userService.authUser(login);
+		return super.response(response, response.getStatus());
 	}
 	
 	@RequestMapping(path="/{id}", method = RequestMethod.PUT)

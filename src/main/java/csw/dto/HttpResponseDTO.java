@@ -281,6 +281,14 @@ public class HttpResponseDTO {
 		response.setStatus(status);
 		return response;
 	}
+	
+	public static HttpResponseDTO fail(final String message, final HttpStatus status) {
+		final HttpResponseDTO response = new HttpResponseDTO();
+		response.addMessage(message);
+		response.setSuccess(Boolean.FALSE);
+		response.setStatus(status);
+		return response;
+	}
 
 	/**
 	 * Success response without content.

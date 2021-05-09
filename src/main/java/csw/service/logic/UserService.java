@@ -1,21 +1,23 @@
 package csw.service.logic;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import csw.domain.Messages;
 import csw.dto.HttpResponseDTO;
 import csw.dto.LoginDTO;
 import csw.dto.PasswordDTO;
+import csw.dto.TokenDTO;
 import csw.dto.UserDTO;
+import csw.service.consumer.UserServiceConsumer;
 
-/**
- * class that have method related to services concerning users
- * 
- * @author Eduardo Dornelles
- */
 @Service
 public class UserService extends AbstractService {
 
-
+	@Autowired
+	UserServiceConsumer userServiceConsumer;
+	
 	public HttpResponseDTO registerUser(final UserDTO user) {
 		this.LogServiceConsumed(this.getClassName(), "registerUser");
 		HttpResponseDTO response = new HttpResponseDTO();
@@ -42,9 +44,11 @@ public class UserService extends AbstractService {
 
 	public HttpResponseDTO authUser(final LoginDTO user) {
 		this.LogServiceConsumed(this.getClassName(), "authUser");
-		HttpResponseDTO response = new HttpResponseDTO();
-		//TODO: Chamada pro keycloak
-		return response;
+		TokenDTO token = userServiceConsumer.requestAuth(user);
+		if (token != null)
+			return HttpResponseDTO.success("access_token", token.getAccess_token());
+		else
+			return HttpResponseDTO.fail(Messages.A001, "Usuário ou senha inválido(s).", HttpStatus.UNAUTHORIZED);
 	}
 
 	/**
