@@ -1,7 +1,6 @@
 package csw.service.consumer;
 
 import java.io.IOException;
-import java.net.HttpRetryException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,6 +16,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
@@ -36,16 +36,6 @@ public abstract class AbstractServiceConsumer extends AbstractService {
 	public void postConstruct() {
 		this.restClient = new RestTemplate();
 		this.restClient.setErrorHandler(new ErrorHandler());
-	}
-
-	protected <T> T get(final Class<T> clazz, final String resource, final Map<String, Object> params, Address address,
-			String token) {
-		final HttpHeaders headers = this.createHeaders(token, null);
-		final HttpEntity<?> entity = new HttpEntity<>(headers);
-		final HttpEntity<T> response = this.restClient.exchange(
-				this.buildURIWithParams(this.uriWithResource(resource, address), params), HttpMethod.GET, entity,
-				clazz);
-		return response.getBody();
 	}
 
 	protected <T> T get(final ParameterizedTypeReference<T> clazz, final String resource,
@@ -131,122 +121,33 @@ public abstract class AbstractServiceConsumer extends AbstractService {
 		return response;
 	}
 	
-	protected <T> T post(final Class<T> clazz, final String resource, final Object body,
-			final Map<String, Object> params, Address address, String token) {
-		final HttpHeaders headers = this.createHeaders(token, null);
-		final HttpEntity<?> entity = new HttpEntity<>(body, headers);
-		final HttpEntity<T> response = this.restClient.exchange(
-				this.buildURIWithParams(this.uriWithResource(resource, address), params), HttpMethod.POST, entity,
-				clazz);
-		return response.getBody();
-	}
-
-	protected <T> T post(final ParameterizedTypeReference<T> clazz, final String resource, final Object body,
-			Address address, String token) throws HttpRetryException {
-		final HttpHeaders headers = this.createHeaders(token, null);
-		final HttpEntity<?> entity = new HttpEntity<>(body, headers);
-		final HttpEntity<T> response = this.restClient.exchange(this.uriWithResource(resource, address),
+	protected <T> int postStatus(final ParameterizedTypeReference<T> clazz, final String resource, final Object body, Address address, String token,
+			MediaType mediaType) {
+		final HttpHeaders headers = this.createHeaders(token, mediaType);
+		final HttpEntity<?> entity = new HttpEntity<>(body, headers);		
+		final ResponseEntity response = this.restClient.exchange(this.uriWithResource(resource, address),
 				HttpMethod.POST, entity, clazz);
-		return response.getBody();
+		return response.getStatusCodeValue();
 	}
-
-	protected <T> T post(final ParameterizedTypeReference<T> clazz, final String resource, final Object body,
-			Address address, HttpHeaders headers) throws HttpRetryException {
-		final HttpEntity<?> entity = new HttpEntity<>(body, headers);
-		final HttpEntity<T> response = this.restClient.exchange(this.uriWithResource(resource, address),
-				HttpMethod.POST, entity, clazz);
-		return response.getBody();
+	
+	protected <T> int putStatus(final ParameterizedTypeReference<T> clazz, final String resource, final Object body, Address address, String token,
+			MediaType mediaType) {
+		final HttpHeaders headers = this.createHeaders(token, mediaType);
+		final HttpEntity<?> entity = new HttpEntity<>(body, headers);		
+		final ResponseEntity response = this.restClient.exchange(this.uriWithResource(resource, address),
+				HttpMethod.PUT, entity, clazz);
+		return response.getStatusCodeValue();
 	}
-
-	protected <T> T post(final ParameterizedTypeReference<T> clazz, final String resource, final Object body,
-			final Map<String, Object> params, Address address, String token) {
-		final HttpHeaders headers = this.createHeaders(token, null);
-		final HttpEntity<?> entity = new HttpEntity<>(body, headers);
-		final HttpEntity<T> response = this.restClient.exchange(
-				this.buildURIWithParams(this.uriWithResource(resource, address), params), HttpMethod.POST, entity,
-				clazz);
-		return response.getBody();
-	}
-
-	protected <T> T put(final Class<T> clazz, final String resource, final Object body, Address address, String token) {
-		final HttpHeaders headers = this.createHeaders(token, null);
-		final HttpEntity<?> entity = new HttpEntity<>(body, headers);
-		final HttpEntity<T> response = this.restClient.exchange(this.uriWithResource(resource, address), HttpMethod.PUT,
-				entity, clazz);
-		return response.getBody();
-	}
-
-	protected <T> T put(final Class<T> clazz, final String resource, final Object body, Address address,
-			HttpHeaders headers) {
-		final HttpEntity<?> entity = new HttpEntity<>(body, headers);
-		final HttpEntity<T> response = this.restClient.exchange(this.uriWithResource(resource, address), HttpMethod.PUT,
-				entity, clazz);
-		return response.getBody();
-	}
-
-	protected <T> T put(final Class<T> clazz, final String resource, final Object body, Map<String, Object> params,
-			Address address, String token) {
-		final HttpHeaders headers = this.createHeaders(token, null);
-		final HttpEntity<?> entity = new HttpEntity<>(body, headers);
-		final HttpEntity<T> response = this.restClient.exchange(
-				this.buildURIWithParams(this.uriWithResource(resource, address), params), HttpMethod.PUT, entity,
-				clazz);
-		return response.getBody();
-	}
-
-	protected <T> T put(final ParameterizedTypeReference<T> clazz, final String resource, final Object body,
-			Address address, String token) {
-		final HttpHeaders headers = this.createHeaders(token, null);
-		final HttpEntity<?> entity = new HttpEntity<>(body, headers);
-		final HttpEntity<T> response = this.restClient.exchange(this.uriWithResource(resource, address), HttpMethod.PUT,
-				entity, clazz);
-		return response.getBody();
-	}
-
-	protected <T> T put(final ParameterizedTypeReference<T> clazz, final String resource, final Object body,
-			Address address, HttpHeaders headers) {
-		final HttpEntity<?> entity = new HttpEntity<>(body, headers);
-		final HttpEntity<T> response = this.restClient.exchange(this.uriWithResource(resource, address), HttpMethod.PUT,
-				entity, clazz);
-		return response.getBody();
-	}
-
-	protected <T> T put(final ParameterizedTypeReference<T> clazz, final String resource, final Object body,
-			final Map<String, Object> params, Address address, String token) {
-		final HttpHeaders headers = this.createHeaders(token, null);
-		final HttpEntity<?> entity = new HttpEntity<>(body, headers);
-		final HttpEntity<T> response = this.restClient.exchange(
-				this.buildURIWithParams(this.uriWithResource(resource, address), params), HttpMethod.PUT, entity,
-				clazz);
-		return response.getBody();
-	}
-
-	protected <T> T delete(final Class<T> clazz, final String resource, final String key, Address address,
-			String token) {
-		final HttpHeaders headers = this.createHeaders(token, null);
-		final HttpEntity<?> entity = new HttpEntity<>(headers);
-		final HttpEntity<T> response = this.restClient.exchange(this.uriWithResource(resource, address),
+	
+	protected <T> int deleteStatus(final Class<T> clazz, final String resource, Address address, String token,
+			MediaType mediaType) {
+		final HttpHeaders headers = this.createHeaders(token, mediaType);
+		final HttpEntity<?> entity = new HttpEntity<>(null, headers);		
+		final ResponseEntity response = this.restClient.exchange(this.uriWithResource(resource, address),
 				HttpMethod.DELETE, entity, clazz);
-		return response.getBody();
+		return response.getStatusCodeValue();
 	}
-
-	protected <T> T delete(final ParameterizedTypeReference<T> clazz, final String resource, final String key,
-			Address address, String token) {
-		final HttpHeaders headers = this.createHeaders(token, null);
-		final HttpEntity<?> entity = new HttpEntity<>(headers);
-		final HttpEntity<T> response = this.restClient.exchange(this.uriWithResource(resource, address),
-				HttpMethod.DELETE, entity, clazz);
-		return response.getBody();
-	}
-
-	protected <T> T delete(final ParameterizedTypeReference<T> clazz, final String resource, final Object body,
-			Address address, HttpHeaders headers) {
-		final HttpEntity<?> entity = new HttpEntity<>(body, headers);
-		final HttpEntity<T> response = this.restClient.exchange(this.uriWithResource(resource, address),
-				HttpMethod.DELETE, entity, clazz);
-		return response.getBody();
-	}
-
+	
 	protected Map<String, Object> getMapParams(final String key, final Object obj) {
 		final Map<String, Object> map = new HashMap<>();
 		map.putIfAbsent(key, obj);

@@ -1,5 +1,7 @@
 package csw.service.logic;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -9,7 +11,7 @@ import csw.dto.HttpResponseDTO;
 import csw.dto.LoginDTO;
 import csw.dto.PasswordDTO;
 import csw.dto.TokenDTO;
-import csw.dto.UserDTO;
+import csw.dto.UserRepresentationDTO;
 import csw.service.consumer.UserServiceConsumer;
 
 @Service
@@ -18,28 +20,23 @@ public class UserService extends AbstractService {
 	@Autowired
 	UserServiceConsumer userServiceConsumer;
 	
-	public HttpResponseDTO registerUser(final UserDTO user) {
+	public HttpResponseDTO registerUser(final String token, final UserRepresentationDTO user) {
 		this.LogServiceConsumed(this.getClassName(), "registerUser");
-		HttpResponseDTO response = new HttpResponseDTO();
-		//TODO: Chamada pro Keycloak
-
-		return response;
+		Integer statusCode = this.userServiceConsumer.requestRegisterUser(token, user);
+		return getResponseCode(statusCode);
 	}
-	
-	public HttpResponseDTO updateUser(final UserDTO user, final String id) {
+
+
+	public HttpResponseDTO updateUser(final String token, final UserRepresentationDTO user, final String id) {
 		this.LogServiceConsumed(this.getClassName(), "updateUser");
-		HttpResponseDTO response = new HttpResponseDTO();
-		//TODO: Chamada pro Keycloak
-
-		return response;
+		Integer statusCode = this.userServiceConsumer.requestUpdateUser(token, user, id);
+		return getResponseCode(statusCode);
 	}
-	
-	public HttpResponseDTO deleteUser(final String id) {
-		this.LogServiceConsumed(this.getClassName(), "deleteUser");
-		HttpResponseDTO response = new HttpResponseDTO();
-		//TODO: Chamada pro Keycloak
 
-		return response;
+	public HttpResponseDTO deleteUser(final String token, final String id) {
+		this.LogServiceConsumed(this.getClassName(), "deleteUser");
+		Integer statusCode = this.userServiceConsumer.requestDeleteUser(token, id);
+		return getResponseCode(statusCode);
 	}
 
 	public HttpResponseDTO authUser(final LoginDTO user) {
@@ -53,26 +50,32 @@ public class UserService extends AbstractService {
 
 	/**
 	 * RESETAR A SENHA SOMENTE
+	 * @param token 
 	 */
-	public HttpResponseDTO patchUser(PasswordDTO cred, String id) {
+	public HttpResponseDTO patchUser(String token, PasswordDTO cred, String id) {
 		this.LogServiceConsumed(this.getClassName(), "patchUser");
-		HttpResponseDTO response = new HttpResponseDTO();
-		//TODO: Chamada pro keycloak
-		return response;
+		Integer statusCode = this.userServiceConsumer.requestResetPasswordUser(token, cred, id);
+		return getResponseCode(statusCode);
 	}
 
-	public HttpResponseDTO listUsers() {
+	public HttpResponseDTO listUsers(String token) {
 		this.LogServiceConsumed(this.getClassName(), "listUsers");
-		HttpResponseDTO response = new HttpResponseDTO();
-		//TODO: Chamada pro keycloak
-		return response;
+		List<UserRepresentationDTO> list = this.userServiceConsumer.requestListUsers(token);
+		return HttpResponseDTO.success("users", list);
 	}
 
-	public HttpResponseDTO getUser(String id) {
+	public HttpResponseDTO getUser(String token, String id) {
 		this.LogServiceConsumed(this.getClassName(), "getUser");
-		HttpResponseDTO response = new HttpResponseDTO();
-		//TODO: Chamada pro keycloak
-		return response;
+		UserRepresentationDTO user = this.userServiceConsumer.requestUser(token, id);
+		return HttpResponseDTO.success("user", user);
+	}
+
+	private HttpResponseDTO getResponseCode(Integer statusCode) {
+		if (statusCode != null && statusCode >= 200 && statusCode <= 299) {
+			return HttpResponseDTO.success(HttpStatus.valueOf(statusCode));
+		} else {
+			return HttpResponseDTO.fail(HttpStatus.valueOf(statusCode == null ? 400 : statusCode));
+		}
 	}
 
 }
