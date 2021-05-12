@@ -12,6 +12,7 @@ import csw.dto.LoginDTO;
 import csw.dto.PasswordDTO;
 import csw.dto.TokenDTO;
 import csw.dto.UserRepresentationDTO;
+import csw.dto.ValidateTokenDTO;
 import csw.service.consumer.UserServiceConsumer;
 
 @Service
@@ -76,6 +77,10 @@ public class UserService extends AbstractService {
 		} else {
 			return HttpResponseDTO.fail(HttpStatus.valueOf(statusCode == null ? 400 : statusCode));
 		}
+	}
+	
+	public Integer getValidateToken(String token) {
+		return this.userServiceConsumer.requestValidateToken(token);
 	}
 
 }

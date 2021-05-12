@@ -304,6 +304,38 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "validate_token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{kc_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{kc_address}}/auth/realms/CswAutenticacao/protocol/openid-connect/userinfo",
+							"host": [
+								"{{kc_address}}"
+							],
+							"path": [
+								"auth",
+								"realms",
+								"CswAutenticacao",
+								"protocol",
+								"openid-connect",
+								"userinfo"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

@@ -83,6 +83,15 @@ public abstract class AbstractServiceConsumer extends AbstractService {
 				clazz);
 		return response.getBody();
 	}
+	
+	protected <T> int getStatus(final ParameterizedTypeReference<T> clazz, final String resource, final Object body, Address address, String token,
+			MediaType mediaType) {
+		final HttpHeaders headers = this.createHeaders(token, mediaType);
+		final HttpEntity<?> entity = new HttpEntity<>(body, headers);		
+		final ResponseEntity response = this.restClient.exchange(this.uriWithResource(resource, address),
+				HttpMethod.GET, entity, clazz);
+		return response.getStatusCodeValue();
+	}
 
 	protected <T> T get(final ParameterizedTypeReference<T> clazz, final String resource, final Object body,
 			final Map<String, Object> params, Address address, String token) {

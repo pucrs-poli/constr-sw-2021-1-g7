@@ -17,6 +17,7 @@ import csw.dto.LoginDTO;
 import csw.dto.PasswordDTO;
 import csw.dto.TokenDTO;
 import csw.dto.UserRepresentationDTO;
+import csw.dto.ValidateTokenDTO;
 import csw.utility.Address;
 
 @Service
@@ -40,6 +41,16 @@ public class UserServiceConsumer extends AbstractServiceConsumer {
 			return null;
 		}
 
+	}
+	
+	public Integer requestValidateToken(String token) {
+		try {
+			return super.getStatus(new ParameterizedTypeReference<ValidateTokenDTO>() {
+			}, "/realms/CswAutenticacao/protocol/openid-connect/userinfo", new HashMap<>(), Address.AUTH_USER, token, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public List<UserRepresentationDTO> requestListUsers(String token) {
