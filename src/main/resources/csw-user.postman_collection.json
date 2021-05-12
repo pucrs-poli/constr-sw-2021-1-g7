@@ -6,318 +6,739 @@
 	},
 	"item": [
 		{
-			"name": "get_token",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
+			"name": "keycloak",
+			"item": [
+				{
+					"name": "get_token",
+					"event": [
 						{
-							"key": "client_id",
-							"value": "login-app",
-							"type": "text"
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"if (response) {\r",
+									"    pm.environment.set(\"kc_token\", response.access_token);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "login-app",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "user1",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
-						{
-							"key": "username",
-							"value": "user1",
-							"type": "text"
+						"url": {
+							"raw": "{{kc_address}}/auth/realms/CswAutenticacao/protocol/openid-connect/token",
+							"host": [
+								"{{kc_address}}"
+							],
+							"path": [
+								"auth",
+								"realms",
+								"CswAutenticacao",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{kc_token}}",
+									"type": "string"
+								}
+							]
 						},
-						{
-							"key": "password",
-							"value": "123456",
-							"type": "text"
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user444\",\r\n    \"firstName\":\"lelele le\",\r\n    \"lastName\":\"aaa faaa\",\r\n    \"email\":\"demo2342@gmail.com\",\r\n    \"enabled\":\"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
-						{
-							"key": "grant_type",
-							"value": "password",
-							"type": "text"
+						"url": {
+							"raw": "{{kc_address}}/auth/admin/realms/CswAutenticacao/users",
+							"host": [
+								"{{kc_address}}"
+							],
+							"path": [
+								"auth",
+								"admin",
+								"realms",
+								"CswAutenticacao",
+								"users"
+							]
 						}
-					],
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://192.168.0.102:8080/auth/realms/CswAutenticacao/protocol/openid-connect/token",
-					"protocol": "http",
-					"host": [
-						"192",
-						"168",
-						"0",
-						"102"
-					],
-					"port": "8080",
-					"path": [
-						"auth",
-						"realms",
-						"CswAutenticacao",
-						"protocol",
-						"openid-connect",
-						"token"
-					]
+				{
+					"name": "update_user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{kc_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"teste11@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{kc_address}}/auth/admin/realms/CswAutenticacao/users/d9b99a54-8372-4990-bb16-e9cc15a57eef",
+							"host": [
+								"{{kc_address}}"
+							],
+							"path": [
+								"auth",
+								"admin",
+								"realms",
+								"CswAutenticacao",
+								"users",
+								"d9b99a54-8372-4990-bb16-e9cc15a57eef"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{kc_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{kc_address}}/auth/admin/realms/CswAutenticacao/users/ea3eb4f6-1f4e-420b-b784-e5e5d86c0acf",
+							"host": [
+								"{{kc_address}}"
+							],
+							"path": [
+								"auth",
+								"admin",
+								"realms",
+								"CswAutenticacao",
+								"users",
+								"ea3eb4f6-1f4e-420b-b784-e5e5d86c0acf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset_password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{kc_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"value\": \"112233\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{kc_address}}/auth/admin/realms/CswAutenticacao/users/960223d8-2e09-4dc4-8cc1-d23cfd0520c1/reset-password",
+							"host": [
+								"{{kc_address}}"
+							],
+							"path": [
+								"auth",
+								"admin",
+								"realms",
+								"CswAutenticacao",
+								"users",
+								"960223d8-2e09-4dc4-8cc1-d23cfd0520c1",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list_users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{kc_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{kc_address}}/auth/admin/realms/CswAutenticacao/users",
+							"host": [
+								"{{kc_address}}"
+							],
+							"path": [
+								"auth",
+								"admin",
+								"realms",
+								"CswAutenticacao",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{kc_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{kc_address}}/auth/admin/realms/CswAutenticacao/users/89ded212-9d72-41d3-b790-84c83b3b936a",
+							"host": [
+								"{{kc_address}}"
+							],
+							"path": [
+								"auth",
+								"admin",
+								"realms",
+								"CswAutenticacao",
+								"users",
+								"89ded212-9d72-41d3-b790-84c83b3b936a"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "create_user",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
+			"name": "user-api",
+			"item": [
+				{
+					"name": "get_token",
+					"event": [
 						{
-							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJUVDNrSE5ZeF9ZMlJTelRIVURXZFg2dWhoMjVuOUx5NDQ5b2FvZVRxcEhvIn0.eyJleHAiOjE2MjAyOTAzNzIsImlhdCI6MTYyMDI5MDA3MiwianRpIjoiMGI2ZDA4ODMtMDU4NS00MGZhLTgyYjgtOWZmYzViMzk5ZWIzIiwiaXNzIjoiaHR0cDovLzE5Mi4xNjguMC4xMDI6ODA4MC9hdXRoL3JlYWxtcy9Dc3dBdXRlbnRpY2FjYW8iLCJhdWQiOlsicmVhbG0tbWFuYWdlbWVudCIsImJyb2tlciIsImFjY291bnQiXSwic3ViIjoiZDliOTlhNTQtODM3Mi00OTkwLWJiMTYtZTljYzE1YTU3ZWVmIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibG9naW4tYXBwIiwic2Vzc2lvbl9zdGF0ZSI6ImYzY2ViNjcxLTdkYTQtNGMxOC1iMWEyLWU5MTYxMWUwN2UxOSIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsInVzZXIiXX0sInJlc291cmNlX2FjY2VzcyI6eyJyZWFsbS1tYW5hZ2VtZW50Ijp7InJvbGVzIjpbInZpZXctcmVhbG0iLCJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsIm1hbmFnZS1pZGVudGl0eS1wcm92aWRlcnMiLCJpbXBlcnNvbmF0aW9uIiwicmVhbG0tYWRtaW4iLCJjcmVhdGUtY2xpZW50IiwibWFuYWdlLXVzZXJzIiwicXVlcnktcmVhbG1zIiwidmlldy1hdXRob3JpemF0aW9uIiwicXVlcnktY2xpZW50cyIsInF1ZXJ5LXVzZXJzIiwibWFuYWdlLWV2ZW50cyIsIm1hbmFnZS1yZWFsbSIsInZpZXctZXZlbnRzIiwidmlldy11c2VycyIsInZpZXctY2xpZW50cyIsIm1hbmFnZS1hdXRob3JpemF0aW9uIiwibWFuYWdlLWNsaWVudHMiLCJxdWVyeS1ncm91cHMiXX0sImxvZ2luLWFwcCI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiYnJva2VyIjp7InJvbGVzIjpbInJlYWQtdG9rZW4iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJ2aWV3LWFwcGxpY2F0aW9ucyIsInZpZXctY29uc2VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwiZGVsZXRlLWFjY291bnQiLCJtYW5hZ2UtY29uc2VudCIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoidXNlcjEgdXNlcjEiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2VyMSIsImdpdmVuX25hbWUiOiJ1c2VyMSIsImZhbWlseV9uYW1lIjoidXNlcjEiLCJlbWFpbCI6InVzZXIxQGdtYWlsLmNvbSJ9.TbMg4tfeZdZp3vyWMl39pgJbzZkJENNsZjOEtE_pA7BMZV1-MgdDLYW-BZWf-I6bBZDXKF9Cl7CMdaZ7Zp3MMme--q9jZv9A1wFnBrzwHYOJx5V-7jgzHHrlC4_QbmZrREzDRCQzl-m17lnyMtK6CpFdIE_OE4XXNS793pkxBJDPK3OmnCxD5NZCsEW0Y1c63wo1b_wtQbkWLeGQvY3ojRhSBwb31q6Lmsgs0bn0YE8GVU8yQ0Lz5AKRyI6g9pnqkWBg9Z2gCQY0Pl_YL6XIduLvIDM1sqasC8HUfB58NaDyTFNmHM4LUUVsBf6aolofFel3BLVy4x_ONjkMGJk3NA",
-							"type": "string"
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"if (response) {\r",
+									"    pm.environment.set(\"kc_token\", response.content.access_token);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
 						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"teste10\",\r\n    \"firstName\":\"xyz\",\r\n    \"lastName\":\"xyz\",\r\n    \"email\":\"demo2@gmail.com\",\r\n    \"enabled\":\"true\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://192.168.0.102:8080/auth/admin/realms/CswAutenticacao/users",
-					"protocol": "http",
-					"host": [
-						"192",
-						"168",
-						"0",
-						"102"
 					],
-					"port": "8080",
-					"path": [
-						"auth",
-						"admin",
-						"realms",
-						"CswAutenticacao",
-						"users"
-					]
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"client_id\": \"login-app\",\r\n    \"username\": \"user1\",\r\n    \"password\":\"123456\",\r\n    \"grant_type\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{user_api_address}}/api/users/auth/",
+							"host": [
+								"{{user_api_address}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"auth",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list_users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{kc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{user_api_address}}/api/users",
+							"host": [
+								"{{user_api_address}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{kc_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{user_api_address}}/api/users/89ded212-9d72-41d3-b790-84c83b3b936a",
+							"host": [
+								"{{user_api_address}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"89ded212-9d72-41d3-b790-84c83b3b936a"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{kc_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user23\",\r\n    \"firstName\":\"ddfsnsdfedqej\",\r\n    \"lastName\":\"ccasdeawce\",\r\n    \"email\":\"2352323fdas@gmail.com\",\r\n    \"enabled\":\"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{user_api_address}}/api/users/",
+							"host": [
+								"{{user_api_address}}"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{kc_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user22\",\r\n    \"firstName\":\"lelelele\",\r\n    \"lastName\":\"ceawce\",\r\n    \"email\":\"235235fs34534df@gmail.com\",\r\n    \"enabled\":\"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{user_api_address}}/api/users/d2757fdc-ba86-499b-b718-860a551664ac",
+							"host": [
+								"{{user_api_address}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"d2757fdc-ba86-499b-b718-860a551664ac"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{kc_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{user_api_address}}/api/users/9a90331c-7c53-46ee-af3a-6d3c71488ebd",
+							"host": [
+								"{{user_api_address}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"9a90331c-7c53-46ee-af3a-6d3c71488ebd"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patch_user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{kc_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"value\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{user_api_address}}/api/users/d2757fdc-ba86-499b-b718-860a551664ac",
+							"host": [
+								"{{user_api_address}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"d2757fdc-ba86-499b-b718-860a551664ac"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		},
 		{
-			"name": "update_user",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJUVDNrSE5ZeF9ZMlJTelRIVURXZFg2dWhoMjVuOUx5NDQ5b2FvZVRxcEhvIn0.eyJleHAiOjE2MjAyOTEzNjQsImlhdCI6MTYyMDI5MTA2NCwianRpIjoiYzhlYmUxNjUtNTQwNy00MjE5LTljMDctM2FmNGYyMGQ5NzRmIiwiaXNzIjoiaHR0cDovLzE5Mi4xNjguMC4xMDI6ODA4MC9hdXRoL3JlYWxtcy9Dc3dBdXRlbnRpY2FjYW8iLCJhdWQiOlsicmVhbG0tbWFuYWdlbWVudCIsImJyb2tlciIsImFjY291bnQiXSwic3ViIjoiZDliOTlhNTQtODM3Mi00OTkwLWJiMTYtZTljYzE1YTU3ZWVmIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibG9naW4tYXBwIiwic2Vzc2lvbl9zdGF0ZSI6ImI0NWI4ZWYyLWRmMDMtNDEzYi05MjExLWRhYWI1YzRkZTExYiIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsInVzZXIiXX0sInJlc291cmNlX2FjY2VzcyI6eyJyZWFsbS1tYW5hZ2VtZW50Ijp7InJvbGVzIjpbInZpZXctcmVhbG0iLCJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsIm1hbmFnZS1pZGVudGl0eS1wcm92aWRlcnMiLCJpbXBlcnNvbmF0aW9uIiwicmVhbG0tYWRtaW4iLCJjcmVhdGUtY2xpZW50IiwibWFuYWdlLXVzZXJzIiwicXVlcnktcmVhbG1zIiwidmlldy1hdXRob3JpemF0aW9uIiwicXVlcnktY2xpZW50cyIsInF1ZXJ5LXVzZXJzIiwibWFuYWdlLWV2ZW50cyIsIm1hbmFnZS1yZWFsbSIsInZpZXctZXZlbnRzIiwidmlldy11c2VycyIsInZpZXctY2xpZW50cyIsIm1hbmFnZS1hdXRob3JpemF0aW9uIiwibWFuYWdlLWNsaWVudHMiLCJxdWVyeS1ncm91cHMiXX0sImxvZ2luLWFwcCI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiYnJva2VyIjp7InJvbGVzIjpbInJlYWQtdG9rZW4iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJ2aWV3LWFwcGxpY2F0aW9ucyIsInZpZXctY29uc2VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwiZGVsZXRlLWFjY291bnQiLCJtYW5hZ2UtY29uc2VudCIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoidXNlcjEgdXNlcjEiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2VyMSIsImdpdmVuX25hbWUiOiJ1c2VyMSIsImZhbWlseV9uYW1lIjoidXNlcjEiLCJlbWFpbCI6InVzZXIxQGdtYWlsLmNvbSJ9.bYjcZ5xq1Pmx957im9lMYjsdig3Ae4FPeEJ786Fn2CUX8ef7WbClLikqiXz5GaeKag2QAafsQZzo9xiC2tx-20T-A-M7TgwMgQneB7XZi0z9Adkw7LCgSq0SxWDBwtJSglH_Vro-06Z1_q9wJsa4M7B9Ok9Kpu4DTxPiuGQXJ4sd7VZ86uKZ_pnhZSDOoLRiFTO3sreZktHvD_lVin-AFIHFPW6OpnzyliKzTikBvJgu5r0OHyTNL1fT5f3GrUEcFVOt4FEbUjAt0YC3N9Gf9ue9FdMEeu9WidUCxnfxyc_o4nYx63QwUDPXYnb31p46LTP_eS6FHUykZUHNt6HITg",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"teste11@gmail.com\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://192.168.0.102:8080/auth/admin/realms/CswAutenticacao/users/d9b99a54-8372-4990-bb16-e9cc15a57eef",
-					"protocol": "http",
-					"host": [
-						"192",
-						"168",
-						"0",
-						"102"
-					],
-					"port": "8080",
-					"path": [
-						"auth",
-						"admin",
-						"realms",
-						"CswAutenticacao",
-						"users",
-						"d9b99a54-8372-4990-bb16-e9cc15a57eef"
-					]
-				}
-			},
-			"response": []
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "kc_token",
+			"value": "",
+			"disabled": true
 		},
 		{
-			"name": "update_user Copy",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJUVDNrSE5ZeF9ZMlJTelRIVURXZFg2dWhoMjVuOUx5NDQ5b2FvZVRxcEhvIn0.eyJleHAiOjE2MjAyOTE0NzgsImlhdCI6MTYyMDI5MTE3OCwianRpIjoiMDMwODU5ZWUtNWRkYi00MTM0LWFlYzgtZDE3YmNhOTZkNTEzIiwiaXNzIjoiaHR0cDovLzE5Mi4xNjguMC4xMDI6ODA4MC9hdXRoL3JlYWxtcy9Dc3dBdXRlbnRpY2FjYW8iLCJhdWQiOlsicmVhbG0tbWFuYWdlbWVudCIsImJyb2tlciIsImFjY291bnQiXSwic3ViIjoiZDliOTlhNTQtODM3Mi00OTkwLWJiMTYtZTljYzE1YTU3ZWVmIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibG9naW4tYXBwIiwic2Vzc2lvbl9zdGF0ZSI6ImQ1ZGIzMzYyLWY3NWItNDFkMi1hMDBmLWUyZGU4MGM2YzBmNyIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsInVzZXIiXX0sInJlc291cmNlX2FjY2VzcyI6eyJyZWFsbS1tYW5hZ2VtZW50Ijp7InJvbGVzIjpbInZpZXctcmVhbG0iLCJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsIm1hbmFnZS1pZGVudGl0eS1wcm92aWRlcnMiLCJpbXBlcnNvbmF0aW9uIiwicmVhbG0tYWRtaW4iLCJjcmVhdGUtY2xpZW50IiwibWFuYWdlLXVzZXJzIiwicXVlcnktcmVhbG1zIiwidmlldy1hdXRob3JpemF0aW9uIiwicXVlcnktY2xpZW50cyIsInF1ZXJ5LXVzZXJzIiwibWFuYWdlLWV2ZW50cyIsIm1hbmFnZS1yZWFsbSIsInZpZXctZXZlbnRzIiwidmlldy11c2VycyIsInZpZXctY2xpZW50cyIsIm1hbmFnZS1hdXRob3JpemF0aW9uIiwibWFuYWdlLWNsaWVudHMiLCJxdWVyeS1ncm91cHMiXX0sImxvZ2luLWFwcCI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiYnJva2VyIjp7InJvbGVzIjpbInJlYWQtdG9rZW4iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJ2aWV3LWFwcGxpY2F0aW9ucyIsInZpZXctY29uc2VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwiZGVsZXRlLWFjY291bnQiLCJtYW5hZ2UtY29uc2VudCIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoidXNlcjEgdXNlcjEiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2VyMSIsImdpdmVuX25hbWUiOiJ1c2VyMSIsImZhbWlseV9uYW1lIjoidXNlcjEiLCJlbWFpbCI6InRlc3RlMTFAZ21haWwuY29tIn0.CGr8EIS1kqi92wIpuCmL2HqBtDldReVxspx8G7bGs-2VYhXPcEH94MSjTb-P-MhIOFGzIPEpOiQoOYgM4hTI476sjAUBPTf5fqV1Ubd9wEsmCjtMqQXJ4bH_mFnscxzYyp01hkTPQjqSIkbXzTrOvj9sRnk-cG_f2HEFzAxM-FqCL822eQQKp-R2poscxfo04mGLgfMJc4VEJcyQy9Ykh3MDMLf2pVZhaSa4psWRAr4UAoqKRhNjRAYPruGoWachPZKWFgzJ1pfe4x14D4xeC0XKV1jahbWemjm0P453Q4VP6vnJ14HRc5cG2baYiwssBBQKFPXdkzHx9hMYMQZKkg",
-							"type": "string"
-						}
-					]
-				},
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"teste11@gmail.com\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://192.168.0.102:8080/auth/admin/realms/CswAutenticacao/users/ea3eb4f6-1f4e-420b-b784-e5e5d86c0acf",
-					"protocol": "http",
-					"host": [
-						"192",
-						"168",
-						"0",
-						"102"
-					],
-					"port": "8080",
-					"path": [
-						"auth",
-						"admin",
-						"realms",
-						"CswAutenticacao",
-						"users",
-						"ea3eb4f6-1f4e-420b-b784-e5e5d86c0acf"
-					]
-				}
-			},
-			"response": []
+			"key": "kc_token",
+			"value": ""
 		},
 		{
-			"name": "reset_password",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJUVDNrSE5ZeF9ZMlJTelRIVURXZFg2dWhoMjVuOUx5NDQ5b2FvZVRxcEhvIn0.eyJleHAiOjE2MjAyODk5NzksImlhdCI6MTYyMDI4OTY3OSwianRpIjoiOThiMmFjZDYtNThlNi00MDA1LThmZGItNGMwNjM1NzcyMDlkIiwiaXNzIjoiaHR0cDovLzE5Mi4xNjguMC4xMDI6ODA4MC9hdXRoL3JlYWxtcy9Dc3dBdXRlbnRpY2FjYW8iLCJhdWQiOlsicmVhbG0tbWFuYWdlbWVudCIsImJyb2tlciIsImFjY291bnQiXSwic3ViIjoiZDliOTlhNTQtODM3Mi00OTkwLWJiMTYtZTljYzE1YTU3ZWVmIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibG9naW4tYXBwIiwic2Vzc2lvbl9zdGF0ZSI6IjI2ZTM5OTFiLTBhYjYtNDBkMC05YTAzLTY4YjJmMjhmNzQ4MyIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsInVzZXIiXX0sInJlc291cmNlX2FjY2VzcyI6eyJyZWFsbS1tYW5hZ2VtZW50Ijp7InJvbGVzIjpbInZpZXctcmVhbG0iLCJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsIm1hbmFnZS1pZGVudGl0eS1wcm92aWRlcnMiLCJpbXBlcnNvbmF0aW9uIiwicmVhbG0tYWRtaW4iLCJjcmVhdGUtY2xpZW50IiwibWFuYWdlLXVzZXJzIiwicXVlcnktcmVhbG1zIiwidmlldy1hdXRob3JpemF0aW9uIiwicXVlcnktY2xpZW50cyIsInF1ZXJ5LXVzZXJzIiwibWFuYWdlLWV2ZW50cyIsIm1hbmFnZS1yZWFsbSIsInZpZXctZXZlbnRzIiwidmlldy11c2VycyIsInZpZXctY2xpZW50cyIsIm1hbmFnZS1hdXRob3JpemF0aW9uIiwibWFuYWdlLWNsaWVudHMiLCJxdWVyeS1ncm91cHMiXX0sImxvZ2luLWFwcCI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiYnJva2VyIjp7InJvbGVzIjpbInJlYWQtdG9rZW4iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJ2aWV3LWFwcGxpY2F0aW9ucyIsInZpZXctY29uc2VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwiZGVsZXRlLWFjY291bnQiLCJtYW5hZ2UtY29uc2VudCIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoidXNlcjEgdXNlcjEiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2VyMSIsImdpdmVuX25hbWUiOiJ1c2VyMSIsImZhbWlseV9uYW1lIjoidXNlcjEiLCJlbWFpbCI6InVzZXIxQGdtYWlsLmNvbSJ9.M2uYoOO99-TerOu66tOV170FXzWS8he1ojQ7vq8mgDZMjK8PVd9pQyd6OyV_0KBWmokxgnpQS9k25fkLSlvhbVI6wd7r7vZSvbOyAU0HYuQWTvMXGpBxP6cCHK1KkgdxX8KozxD6L0VuOAKuT47HklLUG1jxJ4PRbt9bFkN5xGluszFl2RuEjkREj_V2qPFqvjsed8kJaO5Ke_M986ZDaj5bK-kKV7PJVjsojFhbVIIwEworLEdfGskdOiQFkgKFQBHEdXmpAghL3aHBPUcGYHtYmAZWSdx-g-IjXaSmZ-Sm6NEQFYdauVzGxtwPb5M4N5KxLylgFNAMQoasXkY2dQ",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"teste1\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://192.168.0.102:8080/auth/admin/realms/CswAutenticacao/users/960223d8-2e09-4dc4-8cc1-d23cfd0520c1/reset-password",
-					"protocol": "http",
-					"host": [
-						"192",
-						"168",
-						"0",
-						"102"
-					],
-					"port": "8080",
-					"path": [
-						"auth",
-						"admin",
-						"realms",
-						"CswAutenticacao",
-						"users",
-						"960223d8-2e09-4dc4-8cc1-d23cfd0520c1",
-						"reset-password"
-					]
-				}
-			},
-			"response": []
+			"key": "kc_address",
+			"value": "http://ec2-54-94-115-41.sa-east-1.compute.amazonaws.com:8080"
 		},
 		{
-			"name": "list_users",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJUVDNrSE5ZeF9ZMlJTelRIVURXZFg2dWhoMjVuOUx5NDQ5b2FvZVRxcEhvIn0.eyJleHAiOjE2MjAyODk5NzksImlhdCI6MTYyMDI4OTY3OSwianRpIjoiOThiMmFjZDYtNThlNi00MDA1LThmZGItNGMwNjM1NzcyMDlkIiwiaXNzIjoiaHR0cDovLzE5Mi4xNjguMC4xMDI6ODA4MC9hdXRoL3JlYWxtcy9Dc3dBdXRlbnRpY2FjYW8iLCJhdWQiOlsicmVhbG0tbWFuYWdlbWVudCIsImJyb2tlciIsImFjY291bnQiXSwic3ViIjoiZDliOTlhNTQtODM3Mi00OTkwLWJiMTYtZTljYzE1YTU3ZWVmIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibG9naW4tYXBwIiwic2Vzc2lvbl9zdGF0ZSI6IjI2ZTM5OTFiLTBhYjYtNDBkMC05YTAzLTY4YjJmMjhmNzQ4MyIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsInVzZXIiXX0sInJlc291cmNlX2FjY2VzcyI6eyJyZWFsbS1tYW5hZ2VtZW50Ijp7InJvbGVzIjpbInZpZXctcmVhbG0iLCJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsIm1hbmFnZS1pZGVudGl0eS1wcm92aWRlcnMiLCJpbXBlcnNvbmF0aW9uIiwicmVhbG0tYWRtaW4iLCJjcmVhdGUtY2xpZW50IiwibWFuYWdlLXVzZXJzIiwicXVlcnktcmVhbG1zIiwidmlldy1hdXRob3JpemF0aW9uIiwicXVlcnktY2xpZW50cyIsInF1ZXJ5LXVzZXJzIiwibWFuYWdlLWV2ZW50cyIsIm1hbmFnZS1yZWFsbSIsInZpZXctZXZlbnRzIiwidmlldy11c2VycyIsInZpZXctY2xpZW50cyIsIm1hbmFnZS1hdXRob3JpemF0aW9uIiwibWFuYWdlLWNsaWVudHMiLCJxdWVyeS1ncm91cHMiXX0sImxvZ2luLWFwcCI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiYnJva2VyIjp7InJvbGVzIjpbInJlYWQtdG9rZW4iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJ2aWV3LWFwcGxpY2F0aW9ucyIsInZpZXctY29uc2VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwiZGVsZXRlLWFjY291bnQiLCJtYW5hZ2UtY29uc2VudCIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoidXNlcjEgdXNlcjEiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2VyMSIsImdpdmVuX25hbWUiOiJ1c2VyMSIsImZhbWlseV9uYW1lIjoidXNlcjEiLCJlbWFpbCI6InVzZXIxQGdtYWlsLmNvbSJ9.M2uYoOO99-TerOu66tOV170FXzWS8he1ojQ7vq8mgDZMjK8PVd9pQyd6OyV_0KBWmokxgnpQS9k25fkLSlvhbVI6wd7r7vZSvbOyAU0HYuQWTvMXGpBxP6cCHK1KkgdxX8KozxD6L0VuOAKuT47HklLUG1jxJ4PRbt9bFkN5xGluszFl2RuEjkREj_V2qPFqvjsed8kJaO5Ke_M986ZDaj5bK-kKV7PJVjsojFhbVIIwEworLEdfGskdOiQFkgKFQBHEdXmpAghL3aHBPUcGYHtYmAZWSdx-g-IjXaSmZ-Sm6NEQFYdauVzGxtwPb5M4N5KxLylgFNAMQoasXkY2dQ",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://192.168.0.102:8080/auth/admin/realms/CswAutenticacao/users",
-					"protocol": "http",
-					"host": [
-						"192",
-						"168",
-						"0",
-						"102"
-					],
-					"port": "8080",
-					"path": [
-						"auth",
-						"admin",
-						"realms",
-						"CswAutenticacao",
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get_user",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJUVDNrSE5ZeF9ZMlJTelRIVURXZFg2dWhoMjVuOUx5NDQ5b2FvZVRxcEhvIn0.eyJleHAiOjE2MjAyODkzODUsImlhdCI6MTYyMDI4OTA4NSwianRpIjoiOTQ0ODc4YTYtZWM2NC00ODIwLTk3ODgtM2ZiZDY4ZGEwODc1IiwiaXNzIjoiaHR0cDovLzE5Mi4xNjguMC4xMDI6ODA4MC9hdXRoL3JlYWxtcy9Dc3dBdXRlbnRpY2FjYW8iLCJhdWQiOlsicmVhbG0tbWFuYWdlbWVudCIsImJyb2tlciIsImFjY291bnQiXSwic3ViIjoiZDliOTlhNTQtODM3Mi00OTkwLWJiMTYtZTljYzE1YTU3ZWVmIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibG9naW4tYXBwIiwic2Vzc2lvbl9zdGF0ZSI6ImJmYjE4ZDI5LTE1YjQtNGQ1Zi05Y2Y4LWQ5NTUxMGQzMjMzYiIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsInVzZXIiXX0sInJlc291cmNlX2FjY2VzcyI6eyJyZWFsbS1tYW5hZ2VtZW50Ijp7InJvbGVzIjpbInZpZXctcmVhbG0iLCJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsIm1hbmFnZS1pZGVudGl0eS1wcm92aWRlcnMiLCJpbXBlcnNvbmF0aW9uIiwicmVhbG0tYWRtaW4iLCJjcmVhdGUtY2xpZW50IiwibWFuYWdlLXVzZXJzIiwicXVlcnktcmVhbG1zIiwidmlldy1hdXRob3JpemF0aW9uIiwicXVlcnktY2xpZW50cyIsInF1ZXJ5LXVzZXJzIiwibWFuYWdlLWV2ZW50cyIsIm1hbmFnZS1yZWFsbSIsInZpZXctZXZlbnRzIiwidmlldy11c2VycyIsInZpZXctY2xpZW50cyIsIm1hbmFnZS1hdXRob3JpemF0aW9uIiwibWFuYWdlLWNsaWVudHMiLCJxdWVyeS1ncm91cHMiXX0sImxvZ2luLWFwcCI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiYnJva2VyIjp7InJvbGVzIjpbInJlYWQtdG9rZW4iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJ2aWV3LWFwcGxpY2F0aW9ucyIsInZpZXctY29uc2VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwiZGVsZXRlLWFjY291bnQiLCJtYW5hZ2UtY29uc2VudCIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoidXNlcjEgdXNlcjEiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2VyMSIsImdpdmVuX25hbWUiOiJ1c2VyMSIsImZhbWlseV9uYW1lIjoidXNlcjEiLCJlbWFpbCI6InVzZXIxQGdtYWlsLmNvbSJ9.bxTxl3ubtbr-PltSkvVAg0n6MrW-tAmqnJP5dEirSSYUryhrbkXtTKHCC2XAeQB5_p2CHaHme6w8bmjmgJr-8QQ-_N0EBNBRN85D2Kfdhuie9caxtSOUDvDU-7BX0TrmYn0AkH2lHbvV1mv3CdTZ8GNrp3qHWeMCFkT8zWwRE7w_nH7hPAcsmPbqtmMSFVa3Z4TvMFos1ki0_u6J7IMfSp49eRm68H798hkbJoGy1LB-yC7M9hLlOinD75q9bBFPBEPbjVRzM7yJfJxpunbPP57gnabOEXNQEqmT0JlvkDkXzXOaODIr39EIwZ12ueHmhu5mKfqcLRco7JQrQJ7lBA",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://192.168.0.102:8080/auth/admin/realms/CswAutenticacao/users/960223d8-2e09-4dc4-8cc1-d23cfd0520c1",
-					"protocol": "http",
-					"host": [
-						"192",
-						"168",
-						"0",
-						"102"
-					],
-					"port": "8080",
-					"path": [
-						"auth",
-						"admin",
-						"realms",
-						"CswAutenticacao",
-						"users",
-						"960223d8-2e09-4dc4-8cc1-d23cfd0520c1"
-					]
-				}
-			},
-			"response": []
+			"key": "user_api_address",
+			"value": "http://localhost:8082"
 		}
 	]
 }
