@@ -29,7 +29,7 @@ public abstract class AbstractServiceConsumer extends AbstractService {
 
 	private RestTemplate restClient;
 
-	@Value("${keycloak.base.url}")
+	@Value("${auth.base.url}")
 	private String base_url;
 
 	@PostConstruct

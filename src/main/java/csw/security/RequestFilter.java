@@ -11,12 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
 
-import csw.dto.ValidateTokenDTO;
-import csw.service.logic.UserService;
+import csw.service.logic.StudentService;
 
 @Component("RequestFilter")
 public class RequestFilter extends GenericFilterBean {
@@ -24,7 +22,7 @@ public class RequestFilter extends GenericFilterBean {
 	private static Log log = LogFactory.getLog(RequestFilter.class);
 	
 	@Autowired
-	private UserService userService;
+	private StudentService studentService;
 
 	private static final String INVALID_TOKEN = "Permission token not founded or invalid.";
 
@@ -45,18 +43,19 @@ public class RequestFilter extends GenericFilterBean {
 	}
 
 	private boolean isPublicEndPoint(String path) {
-		return path.startsWith("/api/users/auth");
+	   return true;
+	//	return path.startsWith("/api/users/auth");
 	}
 
 	public void validateActiveSession(HttpServletRequest httpReq, ServletRequest req, ServletResponse res,
 			FilterChain chain) throws IOException, ServletException {
 		String token = httpReq.getHeader(Constants.AUTHORIZATION);
-		Integer httpStatus = userService.getValidateToken(token);
-		if (null != httpStatus && httpStatus == 200) {
+//		Integer httpStatus = userService.getValidateToken(token);
+//		if (null != httpStatus && httpStatus == 200) {
 			chain.doFilter(httpReq, res);
-		} else {
-			log.info("RequestFilter.doFilter() | token == null || getValidateToken == null");
-			throw new ServletException(INVALID_TOKEN);
-		}
+//		} else {
+//			log.info("RequestFilter.doFilter() | token == null || getValidateToken == null");
+//			throw new ServletException(INVALID_TOKEN);
+//		}
 	}
 }

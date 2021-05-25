@@ -9,15 +9,15 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.2.4.RELEASE</version>
 	</parent>
-	<groupId>csw-alunos</groupId>
-	<artifactId>csw-alunos</artifactId>
+	<groupId>csw-g7-alunos</groupId>
+	<artifactId>csw-g7-alunos</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.target>1.8</maven.compiler.target>
-	</properties>	
-	<dependencies>			
+	</properties>
+	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -27,6 +27,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+			<version>1.5.2.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
@@ -42,7 +47,7 @@
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
 			<version>1.1.0</version>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>commons-validator</groupId>
 			<artifactId>commons-validator</artifactId>
