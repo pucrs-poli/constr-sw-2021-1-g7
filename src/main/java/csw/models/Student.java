@@ -1,7 +1,6 @@
 package csw.models;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,10 +12,10 @@ public class Student {
 	private String idStudent;
 	// @CPF
 	private String cpf;
-	private String nome;
-	private Date birthDate;
+	private String name;
+	private LocalDate birthDate;
 	private String address;
-	private List<Subscription> subscriptions;
+	// private List<Subscription> subscriptions;
 
 	public Student() {
 		super();
@@ -38,19 +37,27 @@ public class Student {
 		this.cpf = cpf;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getIdStudent() {
+		return idStudent;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setIdStudent(String idStudent) {
+		this.idStudent = idStudent;
 	}
 
-	public Date getBirthDate() {
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public LocalDate getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -62,12 +69,12 @@ public class Student {
 		this.address = address;
 	}
 
-	public List<Subscription> getSubscriptions() {
-		return subscriptions;
-	}
-
-	public void setSubscriptions(List<Subscription> subscriptions) {
-		this.subscriptions = subscriptions;
-	}
+//	public List<Subscription> getSubscriptions() {
+//		return subscriptions;
+//	}
+//
+//	public void setSubscriptions(List<Subscription> subscriptions) {
+//		this.subscriptions = subscriptions;
+//	}
 
 }
