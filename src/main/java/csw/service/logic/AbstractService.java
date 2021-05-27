@@ -1,5 +1,8 @@
 package csw.service.logic;
 
+import java.util.Collection;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,5 +37,13 @@ public class AbstractService {
 	 */
 	protected String getClassName() {
 		return this.getClass().getName();
+	}
+	
+	protected <D, T> D map(final T entity, Class<D> outClass) {
+		return ObjectMapperUtils.getInstancia().map(entity, outClass);
+	}
+	
+	protected <D, T> List<D> mapAll(final Collection<T> entityList, Class<D> outCLass) {
+		return ObjectMapperUtils.getInstancia().mapAll(entityList, outCLass);
 	}
 }

@@ -27,5 +27,10 @@ public interface Messages {
 	 */
 	public static final String A005 = "A005";
 	
+	/**
+	 * {@literal "Erro ao editar um estudante.".}
+	 */
+	public static final String A006 = "A006";
+	
 	
 }
