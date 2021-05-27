@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "a5a662e0-94a7-450d-a819-5c80fb06b766",
-		"name": "csw-user",
+		"name": "csw-g7",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -732,6 +732,492 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "student-api",
+			"item": [
+				{
+					"name": "create_student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{kc_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cpf\": \"03118687037\",\r\n  \"name\": \"Paulo Jorge\",\r\n  \"address\": \"Rua irmao jose otão\",\r\n  \"birthDate\": \"2020-08-29T09:12:33.001Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{student_api_address}}/api/students/",
+							"host": [
+								"{{student_api_address}}"
+							],
+							"path": [
+								"api",
+								"students",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{kc_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{student_api_address}}/api/students/32432432432432",
+							"host": [
+								"{{student_api_address}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"32432432432432"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{kc_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idStudent\": \"60aedc0839e41e1e4f696258\",\r\n    \"cpf\": \"99999999999\",\r\n    \"name\": \"Maria da lalalatata\",\r\n    \"birthDate\": \"2016-08-29\",\r\n    \"address\": \"Rua abcdefgs\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{student_api_address}}/api/students/",
+							"host": [
+								"{{student_api_address}}"
+							],
+							"path": [
+								"api",
+								"students",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit_student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{kc_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idStudent\": \"60aedc0839e41e1e4f696258\",\r\n    \"cpf\": \"99999999999\",\r\n    \"name\": \"Maria da tetete\",\r\n    \"birthDate\": \"2016-08-29\",\r\n    \"address\": \"Rua abcdefgs\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{student_api_address}}/api/students/",
+							"host": [
+								"{{student_api_address}}"
+							],
+							"path": [
+								"api",
+								"students",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list_students",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{kc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{student_api_address}}/api/students",
+							"host": [
+								"{{student_api_address}}"
+							],
+							"path": [
+								"api",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{kc_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{student_api_address}}/api/students/60af0ffd71f7d15e2f6d22e5",
+							"host": [
+								"{{student_api_address}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"60af0ffd71f7d15e2f6d22e5"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_student_query_complex",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{kc_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{student_api_address}}/api/students/query/complex?id=&cpf=99999999999&name=Maria da Silva&birthDate&address",
+							"host": [
+								"{{student_api_address}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"query",
+								"complex"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": ""
+								},
+								{
+									"key": "cpf",
+									"value": "99999999999"
+								},
+								{
+									"key": "name",
+									"value": "Maria da Silva"
+								},
+								{
+									"key": "birthDate",
+									"value": null
+								},
+								{
+									"key": "address",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_student_query_simple",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{kc_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{student_api_address}}/api/students/query/simple?value=03118687037",
+							"host": [
+								"{{student_api_address}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"query",
+								"simple"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "value",
+									"value": "03118687037"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -771,6 +1257,10 @@
 		{
 			"key": "user_api_address",
 			"value": "http://localhost:8082"
+		},
+		{
+			"key": "student_api_address",
+			"value": "http://localhost:8083"
 		}
 	]
 }
