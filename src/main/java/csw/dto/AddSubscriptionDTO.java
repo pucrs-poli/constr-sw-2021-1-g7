@@ -1,30 +1,16 @@
-package csw.models;
+package csw.dto;
 
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+public class AddSubscriptionDTO {
 
-@Document(collection = "subscription")
-public class Subscription {
-
-	@Id
-	private String idSubscription;
 	private Long code;
 	private String idStudent;
 	private String edition;
 	private List<String> tests;
 
-	public Subscription() {
+	public AddSubscriptionDTO() {
 		super();
-	}
-
-	public String getIdSubscription() {
-		return idSubscription;
-	}
-
-	public void setIdSubscription(String idSubscription) {
-		this.idSubscription = idSubscription;
 	}
 
 	public Long getCode() {

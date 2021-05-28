@@ -1,21 +1,16 @@
-package csw.models;
+package csw.dto;
 
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+public class EditSubscriptionDTO {
 
-@Document(collection = "subscription")
-public class Subscription {
-
-	@Id
 	private String idSubscription;
 	private Long code;
 	private String idStudent;
 	private String edition;
 	private List<String> tests;
 
-	public Subscription() {
+	public EditSubscriptionDTO() {
 		super();
 	}
 

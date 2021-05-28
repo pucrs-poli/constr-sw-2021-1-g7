@@ -36,7 +36,7 @@ public class StudentService extends AbstractService {
 		this.LogServiceConsumed(this.getClassName(), "deleteStudent");
 		try {
 			this.studentRepository.deleteById(id);
-			return HttpResponseDTO.success(Messages.A003, "Estudante Removido com sucesso.");
+			return HttpResponseDTO.success("Estudante Removido com sucesso.", Messages.A003);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return HttpResponseDTO.fail(Messages.A002, "Erro ao remover estudante.", HttpStatus.INTERNAL_SERVER_ERROR);

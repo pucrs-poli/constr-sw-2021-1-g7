@@ -342,6 +342,14 @@ public class HttpResponseDTO {
 		return response;
 	}
 	
+	public static HttpResponseDTO success(final String message, final String code) {
+		final HttpResponseDTO response = new HttpResponseDTO();
+		response.setSuccess(Boolean.TRUE);
+		response.addMessage(message, code);
+		response.setStatus(HttpStatus.OK);
+		return response;
+	}
+	
 	/**
 	 * Success response with single content.
 	 *

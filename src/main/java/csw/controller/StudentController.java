@@ -74,11 +74,10 @@ public class StudentController extends AbstractController {
 		HttpResponseDTO response = studentService.getStudentByParams(id, cpf, name, birthDate, address);
 		return super.response(response, response.getStatus());
 	}
-	
+
 	@RequestMapping(path = "/query/simple", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<HttpResponseDTO> getStudentByParam(String value)
-			throws Exception {
+	public ResponseEntity<HttpResponseDTO> getStudentByParam(String value) throws Exception {
 		HttpResponseDTO response = studentService.getStudentByParam(value);
 		return super.response(response, response.getStatus());
 	}
