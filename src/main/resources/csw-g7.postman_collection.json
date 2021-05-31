@@ -1313,14 +1313,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{student_api_address}}/api/students/32432432432432",
+							"raw": "{{student_api_address}}/api/subscriptions/60b05a23ef6b202a58b5fe26",
 							"host": [
 								"{{student_api_address}}"
 							],
 							"path": [
 								"api",
-								"students",
-								"32432432432432"
+								"subscriptions",
+								"60b05a23ef6b202a58b5fe26"
 							],
 							"query": [
 								{
@@ -1421,7 +1421,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idSubscription\": \"60b052c891d9b11409eaccb3\",\r\n    \"code\": 432432,\r\n    \"idStudent\": \"60af0fb871f7d15e2f6d22e4\",\r\n    \"edition\": \"AEGD2020\",\r\n    \"tests\": [\r\n        \"asdfasfsafsaf\",\r\n        \"324dsfr24\",\r\n        \"dfsdfsdf3424324\"\r\n    ]\r\n}",
+							"raw": "{\r\n    \"idSubscription\": \"60b052c891d9b11409eaccb3\",\r\n    \"code\": 432432,\r\n    \"idStudent\": \"60af0fb871f7d15e2f6d22e4\",\r\n    \"edition\": \"AEGD2020\",\r\n    \"tests\": [\r\n        \"sdfdsf\",\r\n        \"324dsfr24\",\r\n        \"dfsdfsdf3424324\"\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1474,8 +1474,8 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{kc_token}}",
-								"type": "text"
+								"type": "text",
+								"value": "{{kc_token}}"
 							}
 						],
 						"body": {
@@ -1488,13 +1488,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{student_api_address}}/api/students",
+							"raw": "{{student_api_address}}/api/subscriptions/",
 							"host": [
 								"{{student_api_address}}"
 							],
 							"path": [
 								"api",
-								"students"
+								"subscriptions",
+								""
 							]
 						}
 					},
@@ -1539,14 +1540,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{student_api_address}}/api/students/60af0ffd71f7d15e2f6d22e5",
+							"raw": "{{student_api_address}}/api/subscriptions/60b052c891d9b11409eaccb3",
 							"host": [
 								"{{student_api_address}}"
 							],
 							"path": [
 								"api",
-								"students",
-								"60af0ffd71f7d15e2f6d22e5"
+								"subscriptions",
+								"60b052c891d9b11409eaccb3"
 							],
 							"query": [
 								{
@@ -1598,13 +1599,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{student_api_address}}/api/students/query/complex?id=&cpf=99999999999&name=Maria da Silva&birthDate&address",
+							"raw": "{{student_api_address}}/api/subscriptions/query/complex?id=&code=432432&idStudent=&edition",
 							"host": [
 								"{{student_api_address}}"
 							],
 							"path": [
 								"api",
-								"students",
+								"subscriptions",
 								"query",
 								"complex"
 							],
@@ -1614,19 +1615,15 @@
 									"value": ""
 								},
 								{
-									"key": "cpf",
-									"value": "99999999999"
+									"key": "code",
+									"value": "432432"
 								},
 								{
-									"key": "name",
-									"value": "Maria da Silva"
+									"key": "idStudent",
+									"value": ""
 								},
 								{
-									"key": "birthDate",
-									"value": null
-								},
-								{
-									"key": "address",
+									"key": "edition",
 									"value": null
 								}
 							]
