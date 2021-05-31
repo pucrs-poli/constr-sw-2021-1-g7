@@ -30,7 +30,7 @@ public class HttpResponseDTO {
 	 * A series o objects to be returned to the client.
 	 */
 	private Map<String, Object> content;
-	
+
 	/**
 	 * Represent the status of the call.
 	 */
@@ -48,8 +48,7 @@ public class HttpResponseDTO {
 	/**
 	 * Defines the success of the operation
 	 *
-	 * @param success
-	 *            the success indicator.
+	 * @param success the success indicator.
 	 */
 	public void setSuccess(final Boolean success) {
 		this.success = success;
@@ -70,8 +69,7 @@ public class HttpResponseDTO {
 	/**
 	 * Get a {@link MessageDTO} based on an index.
 	 *
-	 * @param index
-	 *            {@link Integer} containing the index
+	 * @param index {@link Integer} containing the index
 	 * @return {@link MessageDTO}
 	 */
 	public MessageDTO getMessage(final Integer index) {
@@ -86,8 +84,7 @@ public class HttpResponseDTO {
 	/**
 	 * Get a {@link MessageDTO} based on an code.
 	 *
-	 * @param code
-	 *            {@link String} representing the message code.
+	 * @param code {@link String} representing the message code.
 	 * @return {@link MessageDTO}.
 	 */
 	public MessageDTO getMessage(final String code) {
@@ -102,8 +99,7 @@ public class HttpResponseDTO {
 	/**
 	 * Add a message to the list.
 	 *
-	 * @param message
-	 *            {@link MessageDTO} containing message and code.
+	 * @param message {@link MessageDTO} containing message and code.
 	 */
 	public void addMessage(final MessageDTO message) {
 		if (!GeneralUtils.isEmpty(message)) {
@@ -140,15 +136,14 @@ public class HttpResponseDTO {
 	/**
 	 * Add all messages from a collection to the list.
 	 *
-	 * @param messages
-	 *            {@link Collection<MessageDTO>} Collection of error messages.
+	 * @param messages {@link Collection<MessageDTO>} Collection of error messages.
 	 */
 	public void addMessages(final Collection<MessageDTO> messages) {
 		if (!GeneralUtils.isEmpty(messages)) {
 			getMessages().addAll(messages);
 		}
 	}
-	
+
 	/**
 	 * Get the map representing the content.
 	 *
@@ -166,8 +161,7 @@ public class HttpResponseDTO {
 	/**
 	 * Get the value of the specified key.
 	 *
-	 * @param key
-	 *            {@link String} key to be searched in the map.
+	 * @param key {@link String} key to be searched in the map.
 	 * @return {@link Object} for the key.
 	 */
 	public Object getContent(final String key) {
@@ -182,10 +176,8 @@ public class HttpResponseDTO {
 	/**
 	 * Adds the object as the specified key.
 	 *
-	 * @param key
-	 *            {@link String} containing a key for the map.
-	 * @param value
-	 *            {@link Object} being the value for the key.
+	 * @param key   {@link String} containing a key for the map.
+	 * @param value {@link Object} being the value for the key.
 	 */
 	public void addContent(final String key, final Object value) {
 		if (!GeneralUtils.isEmpty(value)) {
@@ -196,8 +188,7 @@ public class HttpResponseDTO {
 	/**
 	 * Adds the content using the {@link Object} class name as key.
 	 *
-	 * @param value
-	 *            {@link Object} to be part of content.
+	 * @param value {@link Object} to be part of content.
 	 */
 	public void addContent(final Object value) {
 		if (!GeneralUtils.isEmpty(value)) {
@@ -205,15 +196,14 @@ public class HttpResponseDTO {
 			this.getContent().put(key, value);
 		}
 	}
-	
+
 	/**
-	 * @param status
-	 *            {@link #status}
+	 * @param status {@link #status}
 	 */
 	public void setStatus(final HttpStatus status) {
 		this.status = status;
 	}
-	
+
 	/**
 	 * @return {@link #status}
 	 */
@@ -227,8 +217,7 @@ public class HttpResponseDTO {
 	/**
 	 * Fail response with message by MessageDTO.
 	 *
-	 * @param message
-	 *            message
+	 * @param message message
 	 * @return fail response.
 	 */
 	public static HttpResponseDTO fail(final MessageDTO message) {
@@ -238,7 +227,7 @@ public class HttpResponseDTO {
 		response.setStatus(HttpStatus.NOT_ACCEPTABLE);
 		return response;
 	}
-	
+
 	public static HttpResponseDTO fail(final HttpStatus httpStatus) {
 		final HttpResponseDTO response = new HttpResponseDTO();
 		response.setSuccess(Boolean.FALSE);
@@ -249,10 +238,8 @@ public class HttpResponseDTO {
 	/**
 	 * Fail response with message by code and message
 	 *
-	 * @param code
-	 *            message code
-	 * @param message
-	 *            message text
+	 * @param code    message code
+	 * @param message message text
 	 * @return fail response
 	 */
 	public static HttpResponseDTO fail(final String code, final String message) {
@@ -262,7 +249,7 @@ public class HttpResponseDTO {
 		response.setStatus(HttpStatus.NOT_ACCEPTABLE);
 		return response;
 	}
-	
+
 	public static HttpResponseDTO fail(final String message) {
 		final HttpResponseDTO response = new HttpResponseDTO();
 		response.addMessage(message);
@@ -270,14 +257,12 @@ public class HttpResponseDTO {
 		response.setStatus(HttpStatus.NOT_ACCEPTABLE);
 		return response;
 	}
-	
+
 	/**
 	 * Fail response with message by code and message
 	 *
-	 * @param code
-	 *            message code
-	 * @param message
-	 *            message text
+	 * @param code    message code
+	 * @param message message text
 	 * @param status
 	 * @return fail response
 	 */
@@ -288,7 +273,7 @@ public class HttpResponseDTO {
 		response.setStatus(status);
 		return response;
 	}
-	
+
 	public static HttpResponseDTO fail(final String message, final HttpStatus status) {
 		final HttpResponseDTO response = new HttpResponseDTO();
 		response.addMessage(message);
@@ -312,10 +297,8 @@ public class HttpResponseDTO {
 	/**
 	 * Success response with single content.
 	 *
-	 * @param key
-	 *            content key
-	 * @param content
-	 *            content value
+	 * @param key     content key
+	 * @param content content value
 	 * @return Success response with single content.
 	 */
 	public static HttpResponseDTO success(final String key, final Object content) {
@@ -325,7 +308,7 @@ public class HttpResponseDTO {
 		response.setStatus(HttpStatus.OK);
 		return response;
 	}
-	
+
 	public static HttpResponseDTO success(final Object content) {
 		final HttpResponseDTO response = new HttpResponseDTO();
 		response.setSuccess(Boolean.TRUE);
@@ -333,7 +316,7 @@ public class HttpResponseDTO {
 		response.setStatus(HttpStatus.OK);
 		return response;
 	}
-	
+
 	public static HttpResponseDTO success(final String message) {
 		final HttpResponseDTO response = new HttpResponseDTO();
 		response.setSuccess(Boolean.TRUE);
@@ -341,7 +324,7 @@ public class HttpResponseDTO {
 		response.setStatus(HttpStatus.OK);
 		return response;
 	}
-	
+
 	public static HttpResponseDTO success(final String message, final String code) {
 		final HttpResponseDTO response = new HttpResponseDTO();
 		response.setSuccess(Boolean.TRUE);
@@ -349,14 +332,12 @@ public class HttpResponseDTO {
 		response.setStatus(HttpStatus.OK);
 		return response;
 	}
-	
+
 	/**
 	 * Success response with single content.
 	 *
-	 * @param key
-	 *            content key
-	 * @param content
-	 *            content value
+	 * @param key     content key
+	 * @param content content value
 	 * @param status
 	 * @return Success response with single content.
 	 */
@@ -367,11 +348,24 @@ public class HttpResponseDTO {
 		response.setStatus(status);
 		return response;
 	}
-	
+
 	public static HttpResponseDTO success(final HttpStatus status) {
 		final HttpResponseDTO response = new HttpResponseDTO();
 		response.setSuccess(Boolean.TRUE);
 		response.setStatus(status);
 		return response;
 	}
+
+	public Boolean getSuccess() {
+		return success;
+	}
+
+	public void setMessages(Collection<MessageDTO> messages) {
+		this.messages = messages;
+	}
+
+	public void setContent(Map<String, Object> content) {
+		this.content = content;
+	}
+
 }

@@ -10,6 +10,19 @@ public class StudentDTO {
 	private LocalDate birthDate;
 	private String address;
 
+	public StudentDTO() {
+		super();
+	}
+
+	public StudentDTO(String idStudent, String cpf, String name, LocalDate birthDate, String address) {
+		super();
+		this.idStudent = idStudent;
+		this.cpf = cpf;
+		this.name = name;
+		this.birthDate = birthDate;
+		this.address = address;
+	}
+
 	public String getIdStudent() {
 		return idStudent;
 	}

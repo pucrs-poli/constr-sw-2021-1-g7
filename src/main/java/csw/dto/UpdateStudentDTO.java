@@ -10,6 +10,15 @@ public class UpdateStudentDTO {
 	private LocalDate birthDate;
 	private String address;
 
+	public UpdateStudentDTO(String idStudent, String cpf, String name, LocalDate birthDate, String address) {
+		super();
+		this.idStudent = idStudent;
+		this.cpf = cpf;
+		this.name = name;
+		this.birthDate = birthDate;
+		this.address = address;
+	}
+
 	public UpdateStudentDTO() {
 		super();
 	}

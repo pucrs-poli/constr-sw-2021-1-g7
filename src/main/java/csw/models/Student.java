@@ -21,6 +21,14 @@ public class Student {
 		super();
 	}
 
+	public Student(String cpf, String name, LocalDate birthDate, String address) {
+		super();
+		this.cpf = cpf;
+		this.name = name;
+		this.birthDate = birthDate;
+		this.address = address;
+	}
+
 	public String getId() {
 		return idStudent;
 	}

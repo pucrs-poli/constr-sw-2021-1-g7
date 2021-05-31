@@ -9,6 +9,18 @@ public class AddStudentDTO {
 	private LocalDate birthDate;
 	private String address;
 
+	public AddStudentDTO() {
+		super();
+	}
+
+	public AddStudentDTO(String cpf, String name, LocalDate birthDate, String address) {
+		super();
+		this.cpf = cpf;
+		this.name = name;
+		this.birthDate = birthDate;
+		this.address = address;
+	}
+
 	public String getCpf() {
 		return cpf;
 	}
