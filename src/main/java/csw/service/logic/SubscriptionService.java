@@ -104,7 +104,7 @@ public class SubscriptionService extends AbstractService {
 		List<Subscription> subscriptions = this.subscriptionRepository.findByIdSubscriptionOrCodeOrIdStudentOrEdition(id, code, idStudent,
 				edition);
 		if (subscriptions != null) {
-			return HttpResponseDTO.success("subscriptions", super.mapAll(subscriptions, Subscription.class));
+			return HttpResponseDTO.success("subscriptions", super.mapAll(subscriptions, SubscriptionDTO.class));
 		} else {
 			return HttpResponseDTO.fail(Messages.A011, "Inscrição não encontrada.", HttpStatus.NOT_FOUND);
 		}
@@ -114,7 +114,7 @@ public class SubscriptionService extends AbstractService {
 		this.LogServiceConsumed(this.getClassName(), "getSubscriptionByParam");
 		List<Subscription> subscriptions = this.subscriptionRepository.findByParam(value);
 		if (subscriptions != null) {
-			return HttpResponseDTO.success("subscriptions", super.mapAll(subscriptions, Subscription.class));
+			return HttpResponseDTO.success("subscriptions", super.mapAll(subscriptions, SubscriptionDTO.class));
 		} else {
 			return HttpResponseDTO.fail(Messages.A005, "Inscrição não encontrada.", HttpStatus.NOT_FOUND);
 		}
