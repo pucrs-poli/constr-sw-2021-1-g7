@@ -19,6 +19,14 @@ public class Subscription {
 		super();
 	}
 
+	public Subscription(Long code, String idStudent, String edition, List<String> tests) {
+		super();
+		this.code = code;
+		this.idStudent = idStudent;
+		this.edition = edition;
+		this.tests = tests;
+	}
+
 	public String getIdSubscription() {
 		return idSubscription;
 	}

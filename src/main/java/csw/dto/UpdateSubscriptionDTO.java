@@ -1,5 +1,6 @@
 package csw.dto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class UpdateSubscriptionDTO {
@@ -9,6 +10,15 @@ public class UpdateSubscriptionDTO {
 	private String idStudent;
 	private String edition;
 	private List<String> tests;
+	
+	public UpdateSubscriptionDTO(String idSubscription, Long code, String idStudent, String edition, List<String> tests) {
+		super();
+		this.idSubscription = idSubscription;
+		this.code = code;
+		this.idStudent = idStudent;
+		this.edition = edition;
+		this.tests = tests;
+	}
 
 	public UpdateSubscriptionDTO() {
 		super();
