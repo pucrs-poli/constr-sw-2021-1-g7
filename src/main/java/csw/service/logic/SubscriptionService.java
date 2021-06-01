@@ -10,16 +10,21 @@ import csw.domain.Messages;
 import csw.dto.AddSubscriptionDTO;
 import csw.dto.EditSubscriptionDTO;
 import csw.dto.HttpResponseDTO;
+import csw.dto.ResultDTO;
 import csw.dto.SubscriptionDTO;
 import csw.dto.UpdateSubscriptionDTO;
 import csw.models.Subscription;
 import csw.repository.SubscriptionRepository;
+import csw.service.consumer.EvaluationServiceConsumer;
 
 @Service
 public class SubscriptionService extends AbstractService {
 
 	@Autowired
 	SubscriptionRepository subscriptionRepository;
+	
+	@Autowired
+	EvaluationServiceConsumer evaluationServiceConsumer;
 
 	public HttpResponseDTO registerSubscription(AddSubscriptionDTO subscription) {
 		this.LogServiceConsumed(this.getClassName(), "registerSubscription");
@@ -114,9 +119,16 @@ public class SubscriptionService extends AbstractService {
 			return HttpResponseDTO.fail(Messages.A005, "Inscrição não encontrada.", HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	public HttpResponseDTO getResultsBySubscriptionId(String token, String id) {
+		this.LogServiceConsumed(this.getClassName(), "getResultsBySubscriptionId");
+		List<ResultDTO> list = evaluationServiceConsumer.requestResultsBySubscriptionId(token, id);
+		return HttpResponseDTO.success("results", list);
+	}
 
 	public List<SubscriptionDTO> getSubscriptionByStudentId(String id) {
 		List<Subscription> subscriptions = this.subscriptionRepository.findByIdStudent(id);
 		return super.mapAll(subscriptions, SubscriptionDTO.class);
 	}
+
 }

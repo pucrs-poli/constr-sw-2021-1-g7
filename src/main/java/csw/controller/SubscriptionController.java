@@ -1,5 +1,7 @@
 package csw.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import csw.dto.AddSubscriptionDTO;
 import csw.dto.EditSubscriptionDTO;
 import csw.dto.HttpResponseDTO;
 import csw.dto.UpdateSubscriptionDTO;
+import csw.security.Constants;
 import csw.service.logic.SubscriptionService;
 
 @RestController
@@ -60,8 +63,15 @@ public class SubscriptionController extends AbstractController {
 	
 	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<HttpResponseDTO> getStudent(@PathVariable("id") String id) throws Exception {
+	public ResponseEntity<HttpResponseDTO> getSubscription(@PathVariable("id") String id) throws Exception {
 		HttpResponseDTO response = subscriptionService.getSubscription(id);
+		return super.response(response, response.getStatus());
+	}
+	
+	@RequestMapping(path = "/{id}/results", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<HttpResponseDTO> getResultsBySubscriptionId(HttpServletRequest request, @PathVariable("id") String id) throws Exception {
+		HttpResponseDTO response = subscriptionService.getResultsBySubscriptionId(request.getHeader(Constants.AUTHORIZATION), id);
 		return super.response(response, response.getStatus());
 	}
 	

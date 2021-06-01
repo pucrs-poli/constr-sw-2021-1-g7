@@ -1,5 +1,5 @@
 package csw.utility;
 
 public enum Address {
-    AUTH_USER,
+    AUTH_USER, EVALUATIONS
 }

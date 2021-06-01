@@ -32,6 +32,9 @@ public abstract class AbstractServiceConsumer extends AbstractService {
 	@Value("${auth.base.url}")
 	private String base_url;
 
+	@Value("${evaluation.base.url}")
+	protected String evaluation_base_url;
+
 	@PostConstruct
 	public void postConstruct() {
 		this.restClient = new RestTemplate();
@@ -176,6 +179,9 @@ public abstract class AbstractServiceConsumer extends AbstractService {
 		switch (address) {
 		case AUTH_USER:
 			url = base_url;
+			break;
+		case EVALUATIONS:
+			url = evaluation_base_url;
 			break;
 		default:
 			url = null;
