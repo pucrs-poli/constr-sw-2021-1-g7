@@ -1079,6 +1079,66 @@
 					"response": []
 				},
 				{
+					"name": "get_subscriptions_by_studentId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{kc_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{student_api_address}}/api/students/60af0fb871f7d15e2f6d22e4/subscriptions",
+							"host": [
+								"{{student_api_address}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"60af0fb871f7d15e2f6d22e4",
+								"subscriptions"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "get_student_query_complex",
 					"event": [
 						{
@@ -1561,6 +1621,66 @@
 					"response": []
 				},
 				{
+					"name": "get_results_by_subscription",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{kc_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{student_api_address}}/api/subscriptions/60b052c891d9b11409eaccb3/results",
+							"host": [
+								"{{student_api_address}}"
+							],
+							"path": [
+								"api",
+								"subscriptions",
+								"60b052c891d9b11409eaccb3",
+								"results"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "get_subscription_query_complex",
 					"event": [
 						{
@@ -1670,13 +1790,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{student_api_address}}/api/students/query/simple?value=03118687037",
+							"raw": "{{student_api_address}}/api/subscriptions/query/simple?value=AEGD2020",
 							"host": [
 								"{{student_api_address}}"
 							],
 							"path": [
 								"api",
-								"students",
+								"subscriptions",
 								"query",
 								"simple"
 							],
@@ -1688,7 +1808,7 @@
 								},
 								{
 									"key": "value",
-									"value": "03118687037"
+									"value": "AEGD2020"
 								}
 							]
 						}
