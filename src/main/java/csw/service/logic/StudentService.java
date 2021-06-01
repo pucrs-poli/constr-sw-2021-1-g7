@@ -3,7 +3,6 @@ package csw.service.logic;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +11,7 @@ import csw.dto.AddStudentDTO;
 import csw.dto.EditStudentDTO;
 import csw.dto.HttpResponseDTO;
 import csw.dto.StudentDTO;
+import csw.dto.SubscriptionDTO;
 import csw.dto.UpdateStudentDTO;
 import csw.models.Student;
 import csw.repository.StudentRepository;
@@ -21,6 +21,9 @@ public class StudentService extends AbstractService {
 
 	@Autowired
 	StudentRepository studentRepository;
+	
+	@Autowired
+	SubscriptionService subscriptionService;
 
 	public HttpResponseDTO registerStudent(AddStudentDTO student) {
 		this.LogServiceConsumed(this.getClassName(), "registerStudent");
@@ -113,6 +116,16 @@ public class StudentService extends AbstractService {
 			return HttpResponseDTO.success("students", super.mapAll(std, StudentDTO.class));
 		} else {
 			return HttpResponseDTO.fail(Messages.A005, "Estudante não encontrado.", HttpStatus.NOT_FOUND);
+		}
+	}
+
+	public HttpResponseDTO getSubscriptionByStudentId(String id) {
+		this.LogServiceConsumed(this.getClassName(), "getSubscriptionByStudentId");
+		List<SubscriptionDTO> subscriptions = this.subscriptionService.getSubscriptionByStudentId(id);
+		if (subscriptions != null) {
+			return HttpResponseDTO.success("subscriptions", subscriptions);
+		} else {
+			return HttpResponseDTO.fail(Messages.A005, "Inscrições não encontradas.", HttpStatus.NOT_FOUND);
 		}
 	}
 

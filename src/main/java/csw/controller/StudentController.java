@@ -64,6 +64,14 @@ public class StudentController extends AbstractController {
 		HttpResponseDTO response = studentService.getStudent(id);
 		return super.response(response, response.getStatus());
 	}
+	
+	@RequestMapping(path = "/{id}/subscriptions", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<HttpResponseDTO> getSubscriptionByStudentId(@PathVariable("id") String id) throws Exception {
+		HttpResponseDTO response = studentService.getSubscriptionByStudentId(id);
+		return super.response(response, response.getStatus());
+	}
+
 
 	@RequestMapping(path = "/query/complex", method = RequestMethod.GET)
 	@ResponseBody

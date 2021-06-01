@@ -14,4 +14,6 @@ public interface SubscriptionRepository extends MongoRepository<Subscription, St
 	
 	@Query("{ $or: [{'idSubscription' : ?0}, {'code' : ?0}, {'idStudent' : ?0}, {'edition' : ?0}] }")
 	List<Subscription> findByParam(String param);
+	
+	List<Subscription> findByIdStudent(String id);
 }

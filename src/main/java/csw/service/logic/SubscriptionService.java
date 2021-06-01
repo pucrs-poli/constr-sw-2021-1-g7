@@ -10,10 +10,8 @@ import csw.domain.Messages;
 import csw.dto.AddSubscriptionDTO;
 import csw.dto.EditSubscriptionDTO;
 import csw.dto.HttpResponseDTO;
-import csw.dto.StudentDTO;
 import csw.dto.SubscriptionDTO;
 import csw.dto.UpdateSubscriptionDTO;
-import csw.models.Student;
 import csw.models.Subscription;
 import csw.repository.SubscriptionRepository;
 
@@ -115,5 +113,10 @@ public class SubscriptionService extends AbstractService {
 		} else {
 			return HttpResponseDTO.fail(Messages.A005, "Inscrição não encontrada.", HttpStatus.NOT_FOUND);
 		}
+	}
+
+	public List<SubscriptionDTO> getSubscriptionByStudentId(String id) {
+		List<Subscription> subscriptions = this.subscriptionRepository.findByIdStudent(id);
+		return super.mapAll(subscriptions, SubscriptionDTO.class);
 	}
 }
