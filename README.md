@@ -11,7 +11,12 @@ API-STUDENTS: http://ec2-54-207-14-170.sa-east-1.compute.amazonaws.com:8083 <br/
 
 <br/>
 
-Collections utilizadas na API
+<b>MODELAGEM DE CLASSES:</b><br/>
+https://github.com/pucrs-poli/constr-sw-2021-1-g7/tree/alunos/src/main/resources
+
+<br/>
+
+<b>Collections utilizadas na API:</b>
 
 //STUDENT<br/>
 { <br/>
