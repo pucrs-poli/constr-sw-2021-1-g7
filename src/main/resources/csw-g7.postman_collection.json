@@ -766,7 +766,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"cpf\": \"03118687037\",\r\n  \"name\": \"Paulo Jorge\",\r\n  \"address\": \"Rua irmao jose otão\",\r\n  \"birthDate\": \"2020-08-29T09:12:33.001Z\"\r\n}",
+							"raw": "{\r\n  \"cpf\": \"04354675654\",\r\n  \"name\": \"Maria Paula da Silva\",\r\n  \"address\": \"Rua das flores 999\",\r\n  \"birthDate\": \"2001-06-29\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1307,7 +1307,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"code\": 2343244,\r\n  \"idStudent\": \"60af0fb871f7d15e2f6d22e4\",\r\n  \"edition\": \"AWEAS2021\",\r\n  \"tests\": [\r\n    \"asdfasfsafsaf\",\r\n    \"324dsfr24\",\r\n    \"dfsdfsdf3424324\"\r\n  ]\r\n}",
+							"raw": "{\r\n  \"code\": 3343345,\r\n  \"idStudent\": \"60b6f6c215eb6665e3946f6b\",\r\n  \"edition\": \"QQE2021\",\r\n  \"tests\": [\r\n    \"aaaaa\",\r\n    \"wqwee\",\r\n    \"sssss\"\r\n  ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1600,14 +1600,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{student_api_address}}/api/subscriptions/60b052c891d9b11409eaccb3",
+							"raw": "{{student_api_address}}/api/subscriptions/60b6f76515eb6665e3946f6c",
 							"host": [
 								"{{student_api_address}}"
 							],
 							"path": [
 								"api",
 								"subscriptions",
-								"60b052c891d9b11409eaccb3"
+								"60b6f76515eb6665e3946f6c"
 							],
 							"query": [
 								{
@@ -1859,6 +1859,11 @@
 		{
 			"key": "student_api_address",
 			"value": "http://localhost:8083"
+		},
+		{
+			"key": "api_address",
+			"value": "http://localhost:8083",
+			"disabled": true
 		}
 	]
 }
