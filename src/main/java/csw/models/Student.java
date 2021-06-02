@@ -10,12 +10,10 @@ public class Student {
 
 	@Id
 	private String idStudent;
-	// @CPF
 	private String cpf;
 	private String name;
 	private LocalDate birthDate;
-	private String address;
-	// private List<Subscription> subscriptions;
+	private String address;	
 
 	public Student() {
 		super();
@@ -76,13 +74,5 @@ public class Student {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-//	public List<Subscription> getSubscriptions() {
-//		return subscriptions;
-//	}
-//
-//	public void setSubscriptions(List<Subscription> subscriptions) {
-//		this.subscriptions = subscriptions;
-//	}
 
 }
