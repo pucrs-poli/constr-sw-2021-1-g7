@@ -13,6 +13,15 @@ public class EditSubscriptionDTO {
 	public EditSubscriptionDTO() {
 		super();
 	}
+	
+	public EditSubscriptionDTO(String idSubscription, Long code, String idStudent, String edition, List<String> tests) {
+		super();
+		this.idSubscription = idSubscription;
+		this.code = code;
+		this.idStudent = idStudent;
+		this.edition = edition;
+		this.tests = tests;
+	}
 
 	public String getIdSubscription() {
 		return idSubscription;

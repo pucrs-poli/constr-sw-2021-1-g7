@@ -3,6 +3,7 @@ package csw.controller;
 
 
 import java.lang.reflect.Type;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,8 +31,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import csw.dto.AddSubscriptionDTO;
+import csw.dto.EditSubscriptionDTO;
 import csw.dto.HttpResponseDTO;
 import csw.dto.SubscriptionDTO;
+import csw.dto.UpdateSubscriptionDTO;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -77,6 +80,54 @@ public class SubscriptionControllerTest {
     
     @Test
     @Order(2)
+    public void mustCallSubscriptionById() throws Exception {
+    	mvc.perform(MockMvcRequestBuilders.get("/api/subscriptions/"+subscriptions.get(0).getIdSubscription())
+    		      .contentType(MediaType.APPLICATION_JSON))
+    		      .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+    
+    @Test
+    @Order(3)
+    public void mustCallResultBySubscriptionId() throws Exception {
+    	mvc.perform(MockMvcRequestBuilders.get("/api/subscriptions/"+ subscriptions.get(0).getIdSubscription() +"/results")
+    		      .contentType(MediaType.APPLICATION_JSON))
+    		      .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+    
+    @Test
+    @Order(4)
+    public void mustCallUpdateSubscription() throws Exception {
+    	ResultActions rst = mvc.perform(MockMvcRequestBuilders.put("/api/subscriptions")
+    			.content(objectMapper.writeValueAsString(new UpdateSubscriptionDTO(subscriptions.get(0).getIdSubscription(),(long) 4324234, "1", "Subscription updated", new ArrayList<>())))
+    			.accept(MediaType.APPLICATION_JSON)
+    		    .contentType(MediaType.APPLICATION_JSON))    	
+    		    .andExpect(MockMvcResultMatchers.status().isOk());   
+    	MvcResult result = rst.andReturn();
+    	objectMapper.registerModule(new JavaTimeModule());
+    	Type typeMyType = new TypeToken<HttpResponseDTO>(){}.getType();
+    	HttpResponseDTO response = new Gson().fromJson(result.getResponse().getContentAsString(), typeMyType);
+    	SubscriptionDTO subscription = objectMapper.convertValue(response.getContent("subscription"), new TypeReference<SubscriptionDTO>() {});
+    	subscriptions.set(0,subscription);
+    }
+    
+    @Test
+    @Order(5)
+    public void mustCallEditSubscription() throws Exception {
+    	ResultActions rst = mvc.perform(MockMvcRequestBuilders.patch("/api/subscriptions")
+    			.content(objectMapper.writeValueAsString(new EditSubscriptionDTO(subscriptions.get(0).getIdSubscription(), (long) 9999999, "1", "Subscription edited", new ArrayList<>())))
+    			.accept(MediaType.APPLICATION_JSON)
+    		    .contentType(MediaType.APPLICATION_JSON))    	
+    		    .andExpect(MockMvcResultMatchers.status().isOk());   
+    	MvcResult result = rst.andReturn();
+    	objectMapper.registerModule(new JavaTimeModule());
+    	Type typeMyType = new TypeToken<HttpResponseDTO>(){}.getType();
+    	HttpResponseDTO response = new Gson().fromJson(result.getResponse().getContentAsString(), typeMyType);
+    	SubscriptionDTO subscription = objectMapper.convertValue(response.getContent("subscription"), new TypeReference<SubscriptionDTO>() {});
+    	subscriptions.set(0,subscription);
+    }
+    
+    @Test
+    @Order(6)
     public void mustCallRemoveSubscriptionById() throws Exception {
     	mvc.perform(MockMvcRequestBuilders.delete("/api/subscriptions/"+subscriptions.get(0).getIdSubscription())
     		      .contentType(MediaType.APPLICATION_JSON))

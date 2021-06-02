@@ -31,8 +31,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import csw.dto.AddStudentDTO;
+import csw.dto.EditStudentDTO;
 import csw.dto.HttpResponseDTO;
 import csw.dto.StudentDTO;
+import csw.dto.UpdateStudentDTO;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -52,6 +54,7 @@ public class StudentControllerTest {
 
 	static private ArrayList<StudentDTO> students = new ArrayList<StudentDTO>();
    
+	//GET
     @Test
     @Order(0)
     public void mustCallListAllStudents() throws Exception {
@@ -60,11 +63,12 @@ public class StudentControllerTest {
     		      .andExpect(MockMvcResultMatchers.status().isOk());
     }
     
+    //POST
     @Test
     @Order(1)
     public void mustCallRegisterStudent() throws Exception {
     	ResultActions rst = mvc.perform(MockMvcRequestBuilders.post("/api/students")
-    			.content(objectMapper.writeValueAsString(new AddStudentDTO("93156844444", "Student Teste", LocalDate.now(), "Rua dos testes 123456")))
+    			.content(objectMapper.writeValueAsString(new AddStudentDTO("93156844444", "Student Test", LocalDate.now(), "Rua dos testes 123456")))
     			.accept(MediaType.APPLICATION_JSON)
     		    .contentType(MediaType.APPLICATION_JSON))    	
     		    .andExpect(MockMvcResultMatchers.status().isCreated());   
@@ -76,8 +80,61 @@ public class StudentControllerTest {
     	students.add(student);    	
     }
     
+    //GET BY ID
     @Test
     @Order(2)
+    public void mustCallStudentById() throws Exception {
+    	mvc.perform(MockMvcRequestBuilders.get("/api/students/"+students.get(0).getIdStudent())
+    		      .contentType(MediaType.APPLICATION_JSON))
+    		      .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+    
+    //GET SUBSCRIPTION BY STUDENT ID
+    @Test
+    @Order(2)
+    public void mustCallSubscriptionByStudentId() throws Exception {
+    	mvc.perform(MockMvcRequestBuilders.get("/api/students/"+ students.get(0).getIdStudent() +"/subscriptions")
+    		      .contentType(MediaType.APPLICATION_JSON))
+    		      .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+    
+    //PUT
+    @Test
+    @Order(3)
+    public void mustCallUpdateStudent() throws Exception {
+    	ResultActions rst = mvc.perform(MockMvcRequestBuilders.put("/api/students")
+    			.content(objectMapper.writeValueAsString(new UpdateStudentDTO(students.get(0).getIdStudent(), "12346844444", "Student Test 2", LocalDate.now(), "Rua atualizada")))
+    			.accept(MediaType.APPLICATION_JSON)
+    		    .contentType(MediaType.APPLICATION_JSON))    	
+    		    .andExpect(MockMvcResultMatchers.status().isOk());   
+    	MvcResult result = rst.andReturn();
+    	objectMapper.registerModule(new JavaTimeModule());
+    	Type typeMyType = new TypeToken<HttpResponseDTO>(){}.getType();
+    	HttpResponseDTO response = new Gson().fromJson(result.getResponse().getContentAsString(), typeMyType);
+    	StudentDTO student = objectMapper.convertValue(response.getContent("student"), new TypeReference<StudentDTO>() {});
+    	students.set(0,student);
+    }
+    
+    //PATCH
+    @Test
+    @Order(4)
+    public void mustCallEditStudent() throws Exception {
+    	ResultActions rst = mvc.perform(MockMvcRequestBuilders.patch("/api/students")
+    			.content(objectMapper.writeValueAsString(new EditStudentDTO(students.get(0).getIdStudent(), "03055510043", "Student Test 3", LocalDate.now(), "Rua editada")))
+    			.accept(MediaType.APPLICATION_JSON)
+    		    .contentType(MediaType.APPLICATION_JSON))    	
+    		    .andExpect(MockMvcResultMatchers.status().isOk());   
+    	MvcResult result = rst.andReturn();
+    	objectMapper.registerModule(new JavaTimeModule());
+    	Type typeMyType = new TypeToken<HttpResponseDTO>(){}.getType();
+    	HttpResponseDTO response = new Gson().fromJson(result.getResponse().getContentAsString(), typeMyType);
+    	StudentDTO student = objectMapper.convertValue(response.getContent("student"), new TypeReference<StudentDTO>() {});
+    	students.set(0,student);
+    }
+    
+    //DELETE
+    @Test
+    @Order(5)
     public void mustCallRemoveStudentById() throws Exception {
     	mvc.perform(MockMvcRequestBuilders.delete("/api/students/"+students.get(0).getIdStudent())
     		      .contentType(MediaType.APPLICATION_JSON))

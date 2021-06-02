@@ -14,6 +14,15 @@ public class EditStudentDTO {
 		super();
 	}
 
+	public EditStudentDTO(String idStudent, String cpf, String name, LocalDate birthDate, String address) {
+		super();
+		this.idStudent = idStudent;
+		this.cpf = cpf;
+		this.name = name;
+		this.birthDate = birthDate;
+		this.address = address;
+	}
+
 	public String getIdStudent() {
 		return idStudent;
 	}
