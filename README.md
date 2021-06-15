@@ -6,12 +6,19 @@ BRANCH ALUNOS --> API STUDENTS/SUBSCRIPTIONS <br/>
 AMBIENTES NA AWS (EM CLUSTERS COM CONTAINERS DOCKER): <br/>
 
 KEYCLOAK: http://ec2-54-94-115-41.sa-east-1.compute.amazonaws.com:8080/auth <br/>
-MONGO-DB: http://ec2-54-94-17-55.sa-east-1.compute.amazonaws.com:27017/ <br/>
 API-STUDENTS: http://ec2-54-207-14-170.sa-east-1.compute.amazonaws.com:8083 <br/>
+MONGO-DB: http://ec2-54-94-17-55.sa-east-1.compute.amazonaws.com:27017/ <br/>
+
+OBS: o cluster mongo que está na AWS só aceita conexão da EC2 - API STUDENTS na AWS, para testes direto no mongo DB tem que adicionar o IP da maquina no grupo de segurança.
 
 <br/>
 
-Collections utilizadas na API
+<b>MODELAGEM DE CLASSES:</b><br/>
+https://github.com/pucrs-poli/constr-sw-2021-1-g7/tree/alunos/src/main/resources
+
+<br/>
+
+<b>Collections utilizadas na API:</b>
 
 //STUDENT<br/>
 { <br/>
@@ -33,3 +40,6 @@ Collections utilizadas na API
     &nbsp;&nbsp;&nbsp;&nbsp;  "..." <br/>
     &nbsp;&nbsp;] <br/>
 } <br/>
+
+SWAGGER NO PROJETO: http://ec2-54-207-14-170.sa-east-1.compute.amazonaws.com:8083/swagger-ui.html# <br/>
+SWAGGER YAML: https://github.com/pucrs-poli/constr-sw-2021-1-g7/tree/alunos/src/main/resources <br/>
