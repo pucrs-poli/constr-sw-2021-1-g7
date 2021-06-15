@@ -766,7 +766,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"cpf\": \"04354675654\",\r\n  \"name\": \"Maria Paula da Silva\",\r\n  \"address\": \"Rua das flores 999\",\r\n  \"birthDate\": \"2001-06-29\"\r\n}",
+							"raw": "{\r\n  \"cpf\": \"03418348511\",\r\n  \"name\": \"Usuario teste 11\",\r\n  \"address\": \"Rua teste dos testes\",\r\n  \"birthDate\": \"2006-02-24\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -882,7 +882,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idStudent\": \"60aedc0839e41e1e4f696258\",\r\n    \"cpf\": \"99999999999\",\r\n    \"name\": \"Maria da lalalatata\",\r\n    \"birthDate\": \"2016-08-29\",\r\n    \"address\": \"Rua abcdefgs\"\r\n}",
+							"raw": "{\r\n    \"idStudent\": \"60b7f32d15eb6665e3946f72\",\r\n    \"cpf\": \"04354675654\",\r\n    \"name\": \"Maria Paula da Silvaa\",\r\n    \"birthDate\": \"2001-06-29\",\r\n    \"address\": \"Rua das flores 999\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1058,14 +1058,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{student_api_address}}/api/students/60af0ffd71f7d15e2f6d22e5",
+							"raw": "{{student_api_address}}/api/students/32432432",
 							"host": [
 								"{{student_api_address}}"
 							],
 							"path": [
 								"api",
 								"students",
-								"60af0ffd71f7d15e2f6d22e5"
+								"32432432"
 							],
 							"query": [
 								{
@@ -1117,14 +1117,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{student_api_address}}/api/students/60af0fb871f7d15e2f6d22e4/subscriptions",
+							"raw": "{{student_api_address}}/api/students/60b7f32d15eb6665e3946f72/subscriptions",
 							"host": [
 								"{{student_api_address}}"
 							],
 							"path": [
 								"api",
 								"students",
-								"60af0fb871f7d15e2f6d22e4",
+								"60b7f32d15eb6665e3946f72",
 								"subscriptions"
 							],
 							"query": [
@@ -1177,7 +1177,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{student_api_address}}/api/students/query/complex?id=&cpf=99999999999&name=Maria da Silva&birthDate&address",
+							"raw": "{{student_api_address}}/api/students/query/complex?id=&cpf=04145843521&name=Maria da Silva&birthDate&address",
 							"host": [
 								"{{student_api_address}}"
 							],
@@ -1194,7 +1194,7 @@
 								},
 								{
 									"key": "cpf",
-									"value": "99999999999"
+									"value": "04145843521"
 								},
 								{
 									"key": "name",
@@ -1252,7 +1252,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{student_api_address}}/api/students/query/simple?value=03118687037",
+							"raw": "{{student_api_address}}/api/students/query/simple?value=04145843521",
 							"host": [
 								"{{student_api_address}}"
 							],
@@ -1270,7 +1270,7 @@
 								},
 								{
 									"key": "value",
-									"value": "03118687037"
+									"value": "04145843521"
 								}
 							]
 						}
@@ -1307,7 +1307,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"code\": 3343345,\r\n  \"idStudent\": \"60b6f6c215eb6665e3946f6b\",\r\n  \"edition\": \"QQE2021\",\r\n  \"tests\": [\r\n    \"aaaaa\",\r\n    \"wqwee\",\r\n    \"sssss\"\r\n  ]\r\n}",
+							"raw": "{\r\n  \"code\": 45356,\r\n  \"idStudent\": \"60c80490d303470122039633\",\r\n  \"edition\": \"LEE20211\",\r\n  \"tests\": [\r\n    \"vgdfgdf\",\r\n    \"dfgfdggd\",\r\n    \"asdasdsa\"\r\n  ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1719,7 +1719,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{student_api_address}}/api/subscriptions/query/complex?id=&code=432432&idStudent=&edition",
+							"raw": "{{student_api_address}}/api/subscriptions/query/complex?id=&code=3343345&idStudent=&edition",
 							"host": [
 								"{{student_api_address}}"
 							],
@@ -1736,7 +1736,7 @@
 								},
 								{
 									"key": "code",
-									"value": "432432"
+									"value": "3343345"
 								},
 								{
 									"key": "idStudent",
@@ -1790,7 +1790,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{student_api_address}}/api/subscriptions/query/simple?value=AEGD2020",
+							"raw": "{{student_api_address}}/api/subscriptions/query/simple?value=60b937d315eb6665e3946f7a",
 							"host": [
 								"{{student_api_address}}"
 							],
@@ -1808,7 +1808,7 @@
 								},
 								{
 									"key": "value",
-									"value": "AEGD2020"
+									"value": "60b937d315eb6665e3946f7a"
 								}
 							]
 						}
@@ -1854,7 +1854,7 @@
 		},
 		{
 			"key": "user_api_address",
-			"value": "http://localhost:8082"
+			"value": "http://localhost:8083"
 		},
 		{
 			"key": "student_api_address",
@@ -1862,7 +1862,7 @@
 		},
 		{
 			"key": "api_address",
-			"value": "http://localhost:8083",
+			"value": "",
 			"disabled": true
 		}
 	]
