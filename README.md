@@ -6,7 +6,7 @@ BRANCH ALUNOS --> API STUDENTS/SUBSCRIPTIONS <br/>
 AMBIENTE NA AWS: <br/>
 
 KEYCLOAK: http://ec2-54-94-115-41.sa-east-1.compute.amazonaws.com:8080/auth  -- Desligado para não gastar o free tier. <br/>
-API-STUDENTS: http://ec2-18-230-113-95.sa-east-1.compute.amazonaws.com:8083 <br/>
+API-STUDENTS: http://ec2-18-230-113-95.sa-east-1.compute.amazonaws.com:8083  -- Desligado para não ultrapassar o free tier <br/>
 
 <br/>
 
@@ -38,5 +38,5 @@ https://github.com/pucrs-poli/constr-sw-2021-1-g7/tree/alunos/src/main/resources
     &nbsp;&nbsp;] <br/>
 } <br/>
 
-SWAGGER NO PROJETO: http://ec2-54-207-14-170.sa-east-1.compute.amazonaws.com:8083/swagger-ui.html# <br/>
+SWAGGER NO PROJETO: http://ec2-18-230-113-95.sa-east-1.compute.amazonaws.com:8083/swagger-ui.html# <br/>
 SWAGGER YAML: https://github.com/pucrs-poli/constr-sw-2021-1-g7/tree/alunos/src/main/resources <br/>
