@@ -1,15 +1,12 @@
 "# constr-sw-2021-1-g7" 
 
-BRANCH MASTER --> API AUTH KEYCLOAK <br/>
+BRANCH MAIN --> API AUTH KEYCLOAK <br/>
 BRANCH ALUNOS --> API STUDENTS/SUBSCRIPTIONS <br/>
 
-AMBIENTES NA AWS (EM CLUSTERS COM CONTAINERS DOCKER): <br/>
+AMBIENTE NA AWS: <br/>
 
-KEYCLOAK: http://ec2-54-94-115-41.sa-east-1.compute.amazonaws.com:8080/auth <br/>
-API-STUDENTS: http://ec2-54-207-14-170.sa-east-1.compute.amazonaws.com:8083 <br/>
-MONGO-DB: http://ec2-54-94-17-55.sa-east-1.compute.amazonaws.com:27017/ <br/>
-
-OBS: o cluster mongo que está na AWS só aceita conexão da EC2 - API STUDENTS na AWS, para testes direto no mongo DB tem que adicionar o IP da maquina no grupo de segurança.
+KEYCLOAK: http://ec2-54-94-115-41.sa-east-1.compute.amazonaws.com:8080/auth  -- Desligado para não gastar o free tier. <br/>
+API-STUDENTS: http://ec2-18-230-113-95.sa-east-1.compute.amazonaws.com:8083  -- Desligado para não ultrapassar o free tier <br/>
 
 <br/>
 
@@ -41,5 +38,5 @@ https://github.com/pucrs-poli/constr-sw-2021-1-g7/tree/alunos/src/main/resources
     &nbsp;&nbsp;] <br/>
 } <br/>
 
-SWAGGER NO PROJETO: http://ec2-54-207-14-170.sa-east-1.compute.amazonaws.com:8083/swagger-ui.html# <br/>
+SWAGGER NO PROJETO: http://ec2-18-230-113-95.sa-east-1.compute.amazonaws.com:8083/swagger-ui.html# <br/>
 SWAGGER YAML: https://github.com/pucrs-poli/constr-sw-2021-1-g7/tree/alunos/src/main/resources <br/>
