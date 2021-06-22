@@ -766,7 +766,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"cpf\": \"03418348511\",\r\n  \"name\": \"Usuario teste 11\",\r\n  \"address\": \"Rua teste dos testes\",\r\n  \"birthDate\": \"2006-02-24\"\r\n}",
+							"raw": "{\r\n  \"cpf\": \"03158679541\",\r\n  \"name\": \"Usuario teste 1\",\r\n  \"address\": \"Rua das aplicacoes 32432\",\r\n  \"birthDate\": \"2001-05-21\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1058,14 +1058,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{student_api_address}}/api/students/32432432",
+							"raw": "{{student_api_address}}/api/students/60c8044bd303470122039632",
 							"host": [
 								"{{student_api_address}}"
 							],
 							"path": [
 								"api",
 								"students",
-								"32432432"
+								"60c8044bd303470122039632"
 							],
 							"query": [
 								{
