@@ -1858,7 +1858,7 @@
 		},
 		{
 			"key": "student_api_address",
-			"value": "http://localhost:8083"
+			"value": "ec2-54-94-166-37.sa-east-1.compute.amazonaws.com:8083"
 		},
 		{
 			"key": "api_address",
