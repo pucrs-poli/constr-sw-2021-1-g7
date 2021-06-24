@@ -6,9 +6,9 @@ BRANCH ALUNOS --> API STUDENTS/SUBSCRIPTIONS <br/>
 AMBIENTE NA AWS: <br/>
 
 KEYCLOAK: http://ec2-54-94-115-41.sa-east-1.compute.amazonaws.com:8080/auth  -- Desligado. <br/>
-API-STUDENTS: http://ec2-54-232-168-179.sa-east-1.compute.amazonaws.com:8083  -- ONLINE  <br/> 
+API-STUDENTS: http://ec2-54-94-166-37.sa-east-1.compute.amazonaws.com:8083 -- ONLINE  <br/> 
 
-SWAGGER NO PROJETO: http://ec2-54-232-168-179.sa-east-1.compute.amazonaws.com:8083/swagger-ui.html# -- ONLINE E FUNCIONAL<br/> 
+SWAGGER NO PROJETO: http://ec2-54-94-166-37.sa-east-1.compute.amazonaws.com:8083/swagger-ui.html# -- ONLINE E FUNCIONAL<br/> 
 
 <br/>
 
